@@ -11,22 +11,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/company_detail_margin_left"
-        android:text="2015" />
-    <TextView
-        android:layout_width="wrap_content"
+        android:src="@drawable/ic_arrow_back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/company_detail_margin_left"
-        android:text="B轮" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/company_detail_margin_left"
-        android:text="$ 数百万" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/company_detail_margin_left"
-        android:text="华兴资本" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/legalPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/company_detail_margin_left"
+            android:text="CTO" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/company_detail_margin_left"
+            android:text="CTO" />
+    </LinearLayout>
 
 
 </LinearLayout>

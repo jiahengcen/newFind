@@ -38,6 +38,7 @@ class CompanyDetailEntity {
     //]
     var tags: ArrayList<String>? = null
     var marginInformation: MutableList<Funding> = mutableListOf()
+    var members: MutableList<String> = mutableListOf()
 
     class Funding constructor(funding: String?, investment: String?, investors: String?, round: String?) {
 
@@ -50,5 +51,20 @@ class CompanyDetailEntity {
         //"round": "\u79cd\u5b50\u8f6e"
         var round: String? = round
 
+    }
+
+    class Member constructor(description: String?, education: String?, name: String?, photo: String?, position: String?, work: String?) {
+        //description	"彭禹斯，IT桔子的联合创始人，热爱code，热爱互联网。此前曾在雅虎研究院、天使汇等工作。"
+        var description: String? = description
+        //education	""
+        var education: String? = education
+        //name	"彭禹斯"
+        var name: String? = name
+        //photo	"https://www.xiniudata.com/file/5656bceee4861d2a64c5a514"
+        var photo: String? = photo
+        //position	"联合创始人&CTO"
+        var position: String? = position
+        //work	"雅虎、天使汇"
+        var work: String? = work
     }
 }

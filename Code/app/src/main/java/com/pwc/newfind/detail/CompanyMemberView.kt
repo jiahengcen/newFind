@@ -18,10 +18,12 @@ class CompanyMemberView(context: Context) : FrameLayout(context) {
     init {
         LayoutInflater.from(context).inflate(R.layout.company_member_card_view, this, false)
     }
+
     fun setData(entity: CompanyDetailEntity) {
-        if (entity.marginInformation.size > 0) {
-            for (i in 0..entity.marginInformation.size - 1) {
-                layout_inform.addView(LayoutInflater.from(context).inflate(R.layout.company_margin_card_view_content, this, false))
+        if (entity.members.size > 0) {
+            for (i in 0..entity.members.size - 1) {
+                val itemMemberView = LayoutInflater.from(context).inflate(R.layout.company_member_card_view_content, this, false)
+                layout_inform.addView(itemMemberView)
                 layout_inform.addView(LineView(context))
             }
         }

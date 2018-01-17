@@ -1,11 +1,15 @@
 package com.pwc.newfind.detail
 
 import android.content.Context
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.pwc.newfind.FluidLayout
 import com.pwc.newfind.R
 import com.pwc.newfind.entity.CompanyDetailEntity
 
@@ -20,6 +24,7 @@ class CompanyTitleCardView constructor(context: Context) : FrameLayout(context) 
     private val establishDate: TextView by lazy { findViewById<TextView>(R.id.establishDate) }
     private val location: TextView by lazy { findViewById<TextView>(R.id.location) }
     private val industry: TextView by lazy { findViewById<TextView>(R.id.industry) }
+    private val tags: FluidLayout by lazy { findViewById<FluidLayout>(R.id.tags) }
 
     init {
         this.addView(LayoutInflater.from(context).inflate(R.layout.company_title_card_view, this, false))
@@ -43,7 +48,27 @@ class CompanyTitleCardView constructor(context: Context) : FrameLayout(context) 
         establishDate.text = entity.establishDate
         location.text = entity.location
         industry.text = entity.industry
+        setTags(entity)
 
+    }
+
+    private fun setTags(entity: CompanyDetailEntity) {
+        tags.removeAllViews()
+        tags.setGravity(Gravity.TOP)
+        for (i in 0..entity.tags!!.size - 1) {
+            val tv = TextView(context)
+            tv.text = entity.tags!![i]
+            tv.textSize = 13f
+            tv.setPadding(dp2px(12), 2, dp2px(12), 2)
+            tv.setBackgroundResource(R.drawable.text_grey_bg)
+            val params = FluidLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
+            params.setMargins(0, 12, 24, 12)
+            tags.addView(tv, params)
+        }
 
     }
 
@@ -51,4 +76,8 @@ class CompanyTitleCardView constructor(context: Context) : FrameLayout(context) 
         Glide.with(this.context).load(imageUrl).into(titleIcon)
     }
 
+    private fun dp2px(dp: Int): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
+                resources.displayMetrics).toInt()
+    }
 }

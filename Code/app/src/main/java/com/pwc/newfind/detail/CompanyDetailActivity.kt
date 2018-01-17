@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -22,7 +23,8 @@ import rx.schedulers.Schedulers
  */
 class CompanyDetailActivity : AppCompatActivity() {
     private val companyCode by lazy {
-        intent.getStringExtra(COMPANY_CODE)
+        //intent.getStringExtra(COMPANY_CODE)
+        "suiyuejiezi"
     }
     private val companyDetailEntity = CompanyDetailEntity()
 
@@ -41,6 +43,9 @@ class CompanyDetailActivity : AppCompatActivity() {
     }
     private val marginInformationView: MarginInformationView by lazy {
         MarginInformationView(this)
+    }
+    private val companyMemberView: CompanyMemberView by lazy {
+        CompanyMemberView(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,12 +91,16 @@ class CompanyDetailActivity : AppCompatActivity() {
                         companyDetailEntity.website = action?.info?.website
                         titleView.setData(companyDetailEntity)
                         toolbar.title = companyDetailEntity.name
-                        parentView.addView(initTitleCardView())
+                        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                        params.leftMargin = dp2px(8)
+                        params.rightMargin = dp2px(8)
+                        params.topMargin = dp2px(8)
+                        parentView.addView(initTitleCardView(), params)
 
                         /**
                          * part 2  Company Profile
                          */
-                        parentView.addView(profileView)
+                        parentView.addView(profileView, params)
                         profileView.setData(companyDetailEntity)
 
                         /**
@@ -103,27 +112,35 @@ class CompanyDetailActivity : AppCompatActivity() {
                                 companyDetailEntity.marginInformation.add(item)
                             }
                         }
-                        Log.e("HLA", "Hello")
-                        parentView.addView(marginInformationView)
+                        parentView.addView(marginInformationView, params)
                         marginInformationView.setData(companyDetailEntity)
                         /**
                          * part 4 团队信息
                          */
-
+                        parentView.addView(companyMemberView)
+                        companyMemberView.setData(companyDetailEntity)
                         /**
                          * part 5 主要产品
                          */
+
                         /**
                          * part 6 公司经营状况
                          */
+
                         /**
                          * part 7 PWC点评
                          */
+
                         /**
                          * part 8 竞品推荐
                          */
                     }
                 })
+    }
+
+    private fun dp2px(dp: Int): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
+                resources.displayMetrics).toInt()
     }
 
     private fun initTitleCardView(): View {

@@ -9,5 +9,7 @@
     <color name="lightgrey">#F2F2F2</color> <!-- 亮灰色 #F5F5F5-->
     <color name="grey">#eceaea</color>
     <color name="darkgrey">#a9a9a9</color> <!-- 暗灰色 -->
-
+    <color name="titleTextColor">#96876D</color>
+    <color name="contentTitleTextColor">#999999</color>
+    <color name="contentTextColor">#000000</color>
 </resources>
