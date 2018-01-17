@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/company_detail_margin_left"
+            android:text="公司简介" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/company_detail_margin_right"
+            android:layout_marginStart="@dimen/company_detail_margin_left"
+            tools:text="IT桔子是一个关注TMT领域创业与投资的数据库，致力于为用户提供结构化的公司数据和商业信息。" />
+
+        <FrameLayout
+            android:id="@+id/divider_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginEnd="@dimen/company_detail_margin_right"
+            android:layout_marginStart="@dimen/company_detail_margin_left"
+            android:background="@color/lightgrey" />
+
+        <LinearLayout
+            android:id="@+id/fullCompanyNameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="公司名称：" />
+
+            <TextView
+                android:id="@+id/fullCompanyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                tools:text="北京岁月桔子科技有限公司" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/divider_line2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginEnd="@dimen/company_detail_margin_right"
+            android:layout_marginStart="@dimen/company_detail_margin_left"
+            android:background="@color/lightgrey" />
+
+        <LinearLayout
+            android:id="@+id/legalPersonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="法人代表：" />
+
+            <TextView
+                android:id="@+id/legalPerson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                tools:text="文飞翔" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/divider_line3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginEnd="@dimen/company_detail_margin_right"
+            android:layout_marginStart="@dimen/company_detail_margin_left"
+            android:background="@color/lightgrey" />
+
+        <LinearLayout
+            android:id="@+id/establishDateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="注册时间：" />
+
+            <TextView
+                android:id="@+id/establishDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                tools:text="2013-07" />
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

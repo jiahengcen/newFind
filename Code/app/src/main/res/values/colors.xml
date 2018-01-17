@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#E0301E</color>
+    <color name="colorPrimaryDark">#C52A1A</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="black">#000000</color> <!-- 黑色 -->
+    <color name="white">#ffffff</color> <!-- 白色 -->
+    <color name="lightgrey">#F2F2F2</color> <!-- 亮灰色 #F5F5F5-->
+    <color name="grey">#eceaea</color>
+    <color name="darkgrey">#a9a9a9</color> <!-- 暗灰色 -->
+
+</resources>

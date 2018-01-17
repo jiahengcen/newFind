@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">NewFind</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="pick_job_title">选择你偏好的领域</string>
+    <string name="pick_company_title">请选择关注的公司</string>
+    <string name="before">上一步</string>
+    <string name="start">开始使用</string>
+    <string name="pick_job_next">下一步</string>
+    <string name="test_subscription">摩拜单车</string>
+    <string name="test_subscription_sub">"@"摩拜单车</string>
+    <string name="test_subscription_time">4小时前</string>
+    <string name="test_subscription_content">出让10%的股份给一汽，膜拜还能做共享汽车</string>
+</resources>
