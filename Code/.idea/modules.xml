@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Code.iml" filepath="$PROJECT_DIR$/Code.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/searchview/searchview.iml" filepath="$PROJECT_DIR$/searchview/searchview.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipemenulistview/swipemenulistview.iml" filepath="$PROJECT_DIR$/swipemenulistview/swipemenulistview.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tags.iml" filepath="$PROJECT_DIR$/tags.iml" />
       <module fileurl="file://$PROJECT_DIR$/testswipelist/testswipelist.iml" filepath="$PROJECT_DIR$/testswipelist/testswipelist.iml" />
     </modules>
   </component>

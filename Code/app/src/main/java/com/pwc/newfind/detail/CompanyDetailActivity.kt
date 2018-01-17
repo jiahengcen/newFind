@@ -109,6 +109,19 @@ class CompanyDetailActivity : AppCompatActivity() {
                         /**
                          * part 4 团队信息
                          */
+
+                        /**
+                         * part 5 主要产品
+                         */
+                        /**
+                         * part 6 公司经营状况
+                         */
+                        /**
+                         * part 7 PWC点评
+                         */
+                        /**
+                         * part 8 竞品推荐
+                         */
                     }
                 })
     }
