@@ -9,7 +9,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.pwc.newfind.FluidLayout
+import com.pwc.newfind.view.FluidLayout
 import com.pwc.newfind.R
 import com.pwc.newfind.entity.CompanyDetailEntity
 

@@ -99,7 +99,7 @@
                 android:id="@+id/next_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                android:drawableRight="@drawable/ic_chevron_right"
                 android:text="@string/start"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />

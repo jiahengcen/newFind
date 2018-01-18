@@ -1,4 +1,4 @@
-package com.pwc.newfind;
+package com.pwc.newfind.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,6 +7,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
+
+import com.pwc.newfind.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -28,11 +28,11 @@ class CompanyAdapter : RecyclerView.Adapter<CompanyAdapter.ViewHolder>() {
                 if (data[position].select) {
                     holder.selectLayout.setBackgroundColor(holder.itemView.resources.getColor(R.color.colorPrimary))
                     holder.textView.setTextColor(holder.itemView.resources.getColor(R.color.white))
-                    holder.select.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.ic_check_black_24dp))
+                    holder.select.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.ic_check))
                 } else {
                     holder.selectLayout.setBackgroundColor(holder.itemView.resources.getColor(R.color.lightgrey))
                     holder.textView.setTextColor(holder.itemView.resources.getColor(R.color.black))
-                    holder.select.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.ic_add_black_24dp))
+                    holder.select.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.ic_add))
                 }
             }
 
