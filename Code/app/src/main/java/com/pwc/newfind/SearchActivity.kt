@@ -74,7 +74,7 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (sub!!.isUnsubscribed) {
+        if (sub != null && sub!!.isUnsubscribed) {
             sub!!.unsubscribe()
         }
     }

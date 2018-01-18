@@ -38,7 +38,7 @@ class CompanyDetailEntity {
     //]
     var tags: ArrayList<String>? = null
     var marginInformation: MutableList<Funding> = mutableListOf()
-    var members: MutableList<String> = mutableListOf()
+    var members: MutableList<Member> = mutableListOf()
 
     class Funding constructor(funding: String?, investment: String?, investors: String?, round: String?) {
 

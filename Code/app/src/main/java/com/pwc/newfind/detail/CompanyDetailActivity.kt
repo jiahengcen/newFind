@@ -56,7 +56,7 @@ class CompanyDetailActivity : AppCompatActivity() {
         window.statusBarColor = Color.rgb(0xC5, 0x2A, 0x1A)
         setContentView(R.layout.company_detail_activity)
         setSupportActionBar(toolbar)
-
+        toolbar.setNavigationOnClickListener { this@CompanyDetailActivity.finish() }
         load()
     }
 
@@ -68,7 +68,7 @@ class CompanyDetailActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<CompanyDetailBean> {
                     override fun onError(e: Throwable?) {
-                        Log.e("HLA", "error")
+                        Log.e("HLA", "companyDetailInformation net error")
                     }
 
                     override fun onCompleted() {
@@ -117,16 +117,33 @@ class CompanyDetailActivity : AppCompatActivity() {
                         /**
                          * part 4 团队信息
                          */
-                        parentView.addView(companyMemberView)
+                        if (action?.member != null) {
+                            try {
+                                for (i in 0..action.member!!.size - 1) {
+                                    val item = CompanyDetailEntity.Member(
+                                            action.member!![i].description,
+                                            action.member!![i].education,
+                                            action.member!![i].name,
+                                            action.member!![i].photo,
+                                            action.member!![i].position,
+                                            action.member!![i].work)
+                                    companyDetailEntity.members.add(item)
+                                }
+                            } catch (e: Exception) {
+                                Log.e("HLA", "member..." + e.message)
+                            }
+                        }
+                        parentView.addView(companyMemberView, params)
                         companyMemberView.setData(companyDetailEntity)
                         /**
                          * part 5 主要产品
                          */
 
+
                         /**
                          * part 6 公司经营状况
                          */
-
+                        //因为现在新公司这个情况很少纰漏，现在不做这个功能
                         /**
                          * part 7 PWC点评
                          */
@@ -134,6 +151,7 @@ class CompanyDetailActivity : AppCompatActivity() {
                         /**
                          * part 8 竞品推荐
                          */
+
                     }
                 })
     }
