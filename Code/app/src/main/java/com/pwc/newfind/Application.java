@@ -2,9 +2,25 @@ package com.pwc.newfind;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import com.pwc.newfind.bean.Token;
 import com.pwc.newfind.db.DaoMaster;
 import com.pwc.newfind.db.DaoSession;
+import com.pwc.newfind.db.UserDao;
+import com.pwc.newfind.db.entity.User;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by lhuang126 on 1/13/2018.
@@ -17,6 +33,7 @@ public class Application extends android.app.Application {
     private SQLiteDatabase db;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
+    private String mUserToken;
 
     @Override
     public void onCreate() {
@@ -24,6 +41,41 @@ public class Application extends android.app.Application {
         appContext = this;
         instances = this;
         setDatabase();
+        getUserTokenNet();
+    }
+
+    private void getUserTokenNet() {
+        if (mUserToken == null) {
+            List<User> user = getDaoSession().getUserDao().queryBuilder().where(UserDao.Properties.Id.eq(1)).list();
+            if (!user.isEmpty()) {
+                mUserToken = user.get(0).getToken();
+                Log.e("HLA", "get token from db:" + mUserToken);
+            }
+        }
+        if (mUserToken == null) {
+            new Retrofit.Builder()
+                    .addConverterFactory(new StringConverterFactory())
+                    .baseUrl(Constant.host)
+                    .build().create(RetrofitService.class)
+                    .getUserToken()
+                    .enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            mUserToken = response.body();
+                            User user = new User();
+                            user.setId(1L);
+                            user.setAge(0);
+                            user.setToken(mUserToken);
+                            getDaoSession().getUserDao().insertOrReplace(user);
+                            Log.e("HLA", "get token from net:" + mUserToken);
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Log.e("HLA", "onFailure" + call);
+                        }
+                    });
+        }
     }
 
     public static Application getInstances() {
@@ -53,5 +105,9 @@ public class Application extends android.app.Application {
         return db;
     }
 
+    public String getUserToken() {
+
+        return mUserToken;
+    }
 
 }

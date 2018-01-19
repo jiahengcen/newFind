@@ -47,6 +47,9 @@ class CompanyDetailActivity : AppCompatActivity() {
     private val companyMemberView: CompanyMemberView by lazy {
         CompanyMemberView(this)
     }
+    private val companyCompareView: CompanyCompareView by lazy {
+        CompanyCompareView(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +66,7 @@ class CompanyDetailActivity : AppCompatActivity() {
     private fun load() {
         RetrofitHelper.getInstance(this)
                 .server
-                .companyDetailInformation(companyCode)
+                .companyDetailInformation("",companyCode)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<CompanyDetailBean> {
@@ -151,7 +154,26 @@ class CompanyDetailActivity : AppCompatActivity() {
                         /**
                          * part 8 竞品推荐
                          */
-
+                        if (action?.comp != null) {
+                            try {
+                                for (i in 0..action.comp.size - 1) {
+                                    val item = CompanyDetailEntity.CompareCompany(
+                                            action.comp[i].establishDate,
+                                            action.comp[i].fullName,
+                                            action.comp[i].industry,
+                                            action.comp[i].location,
+                                            action.comp[i].logo,
+                                            action.comp[i].name,
+                                            action.comp[i].round
+                                    )
+                                    companyDetailEntity.compare.add(item)
+                                }
+                            } catch (e: Exception) {
+                                Log.e("HLA", "compare..." + e.message)
+                            }
+                        }
+                        parentView.addView(companyCompareView, params)
+                        companyCompareView.setData(companyDetailEntity)
                     }
                 })
     }

@@ -34,5 +34,6 @@ object Constant {
      * 公司详情信息http://47.100.119.94:8081/v1/company/detail?companyCode=zuitaokeji
      */
     const val detailCompany = "company/detail"
+    const val getToken="user/get_token"
 }
 

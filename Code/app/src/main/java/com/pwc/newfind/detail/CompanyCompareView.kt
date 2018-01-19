@@ -19,20 +19,20 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.company_margin_card_view.view.*
 
 /**
- * Created by lhuang126 on 1/17/2018.
+ * Created by lhuang126 on 1/18/2018.
  */
-class CompanyMemberView(context: Context) : FrameLayout(context) {
+class CompanyCompareView(context: Context) : FrameLayout(context) {
     init {
-        addView(LayoutInflater.from(context).inflate(R.layout.company_member_card_view, this, false))
+        addView(LayoutInflater.from(context).inflate(R.layout.company_compare_card_view, this, false))
     }
 
     fun setData(entity: CompanyDetailEntity) {
-        if (entity.members.size > 0) {
-            for (i in 0..entity.members.size - 1) {
+        if (entity.compare.size > 0) {
+            for (i in 0..entity.compare.size - 1) {
                 try {
-                    val itemMemberView = LayoutInflater.from(context).inflate(R.layout.company_member_card_view_content, null, false)
-                    Glide.with(context).load(entity.members[i].photo).into(itemMemberView.findViewById<CircleImageView>(R.id.photo))
-                    itemMemberView.findViewById<TextView>(R.id.legalPerson).text = getLegalPerson(entity.members[i])
+                    val itemMemberView = LayoutInflater.from(context).inflate(R.layout.company_compare_card_view_content, null, false)
+                    Glide.with(context).load(entity.compare[i].logo).into(itemMemberView.findViewById<CircleImageView>(R.id.titleIcon))
+                    itemMemberView.findViewById<TextView>(R.id.title).text = entity.compare[i].name
                     val detailTextView = itemMemberView.findViewById<TextView>(R.id.content)
                     val button = itemMemberView.findViewById<TextView>(R.id.button)
                     detailTextView.text = entity.members[i].description

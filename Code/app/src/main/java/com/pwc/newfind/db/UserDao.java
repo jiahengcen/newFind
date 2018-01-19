@@ -26,7 +26,8 @@ public class UserDao extends AbstractDao<User, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property Age = new Property(2, int.class, "age", false, "AGE");
+        public final static Property Age = new Property(2, Integer.class, "age", false, "AGE");
+        public final static Property Token = new Property(3, String.class, "token", false, "TOKEN");
     }
 
 
@@ -44,7 +45,8 @@ public class UserDao extends AbstractDao<User, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"USER\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
-                "\"AGE\" INTEGER NOT NULL );"); // 2: age
+                "\"AGE\" INTEGER," + // 2: age
+                "\"TOKEN\" TEXT);"); // 3: token
     }
 
     /** Drops the underlying database table. */
@@ -66,7 +68,16 @@ public class UserDao extends AbstractDao<User, Long> {
         if (name != null) {
             stmt.bindString(2, name);
         }
-        stmt.bindLong(3, entity.getAge());
+ 
+        Integer age = entity.getAge();
+        if (age != null) {
+            stmt.bindLong(3, age);
+        }
+ 
+        String token = entity.getToken();
+        if (token != null) {
+            stmt.bindString(4, token);
+        }
     }
 
     @Override
@@ -82,7 +93,16 @@ public class UserDao extends AbstractDao<User, Long> {
         if (name != null) {
             stmt.bindString(2, name);
         }
-        stmt.bindLong(3, entity.getAge());
+ 
+        Integer age = entity.getAge();
+        if (age != null) {
+            stmt.bindLong(3, age);
+        }
+ 
+        String token = entity.getToken();
+        if (token != null) {
+            stmt.bindString(4, token);
+        }
     }
 
     @Override
@@ -95,7 +115,8 @@ public class UserDao extends AbstractDao<User, Long> {
         User entity = new User( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.getInt(offset + 2) // age
+            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // age
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // token
         );
         return entity;
     }
@@ -104,7 +125,8 @@ public class UserDao extends AbstractDao<User, Long> {
     public void readEntity(Cursor cursor, User entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setAge(cursor.getInt(offset + 2));
+        entity.setAge(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
+        entity.setToken(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override

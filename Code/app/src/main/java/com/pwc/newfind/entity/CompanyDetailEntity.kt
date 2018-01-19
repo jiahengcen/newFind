@@ -39,6 +39,7 @@ class CompanyDetailEntity {
     var tags: ArrayList<String>? = null
     var marginInformation: MutableList<Funding> = mutableListOf()
     var members: MutableList<Member> = mutableListOf()
+    var compare: MutableList<CompareCompany> = mutableListOf()
 
     class Funding constructor(funding: String?, investment: String?, investors: String?, round: String?) {
 
@@ -66,5 +67,22 @@ class CompanyDetailEntity {
         var position: String? = position
         //work	"雅虎、天使汇"
         var work: String? = work
+    }
+
+    class CompareCompany constructor(establishDate: String?, fullName: String?, industry: String?, location: String?, logo: String?, name: String?, round: String?) {
+        //"establishDate": "2014-04-18",
+        var establishDate: String? = establishDate
+        //"fullName": "\u6df1\u5733\u5e02\u7406\u7ea6\u4e91\u4fe1\u606f\u7ba1\u7406\u6709\u9650\u516c\u53f8",
+        var fullName: String? = fullName
+        //"industry": "\u79d1\u5b66\u7814\u7a76\u548c\u6280\u672f\u670d\u52a1\u4e1a",
+        var industry: String? = industry
+        //"location": "\u6df1\u5733",
+        var location: String? = location
+        //"logo": "https://www.xiniudata.com/file/5970762fb1d37e273190dcce",
+        var logo: String? = logo
+        //"name": "\u7406\u7ea6\u4e91",
+        var name: String? = name
+        //"round": null
+        var round: String? = round
     }
 }
