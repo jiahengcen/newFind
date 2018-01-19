@@ -29,48 +29,42 @@ class CompanyCompareView(context: Context) : FrameLayout(context) {
     fun setData(entity: CompanyDetailEntity) {
         if (entity.compare.size > 0) {
             for (i in 0..entity.compare.size - 1) {
-                try {
-                    val itemMemberView = LayoutInflater.from(context).inflate(R.layout.company_compare_card_view_content, null, false)
-                    Glide.with(context).load(entity.compare[i].logo).into(itemMemberView.findViewById<CircleImageView>(R.id.titleIcon))
-                    itemMemberView.findViewById<TextView>(R.id.title).text = entity.compare[i].name
-                    itemMemberView.findViewById<TextView>(R.id.fullCompanyName).text = entity.compare[i].fullName
-                    val button = itemMemberView.findViewById<TextView>(R.id.favourite)
-                    button.tag = "true"
-                    if (entity.compare[i].starred ?: false) {
-                        button.text = "已关注"
-                    } else {
-                        button.text = "关注"
-                    }
-                    button.setOnClickListener(object : View.OnClickListener {
-                        override fun onClick(v: View?) {
-                            if (button.tag == "true") {
-                                button.tag = "false"
-                            } else {
-                                button.tag = "true"
-                            }
-                        }
-                    })
-                    itemMemberView.findViewById<TextView>(R.id.round).text = entity.compare[i].round
-                    itemMemberView.findViewById<TextView>(R.id.establishDate).text = entity.compare[i].establishDate
-                    itemMemberView.findViewById<TextView>(R.id.location).text = entity.compare[i].location
-                    layout_inform.addView(itemMemberView)
-                    if (i != entity.members.size - 1) {
-                        val line = LineView(context)
-                        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                        params.leftMargin = dp2px(8)
-                        params.rightMargin = dp2px(8)
-                        params.topMargin = dp2px(8)
-                        params.bottomMargin = dp2px(8)
-                        layout_inform.addView(line, params)
-                    }
-                } catch (e: Exception) {
-                    Log.e("HLA", e.message)
+                val itemMemberView = LayoutInflater.from(context).inflate(R.layout.company_compare_card_view_content, null, false)
+                Glide.with(context).load(entity.compare[i].logo).into(itemMemberView.findViewById<CircleImageView>(R.id.titleIcon))
+                itemMemberView.findViewById<TextView>(R.id.title).text = entity.compare[i].name
+                itemMemberView.findViewById<TextView>(R.id.fullCompanyName).text = entity.compare[i].fullName
+                val button = itemMemberView.findViewById<TextView>(R.id.favourite)
+                button.tag = "true"
+                if (entity.compare[i].starred ?: false) {
+                    button.text = "已关注"
+                } else {
+                    button.text = "关注"
                 }
-
+                button.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(v: View?) {
+                        if (button.tag == "true") {
+                            button.tag = "false"
+                        } else {
+                            button.tag = "true"
+                        }
+                    }
+                })
+                itemMemberView.findViewById<TextView>(R.id.round).text = entity.compare[i].round
+                itemMemberView.findViewById<TextView>(R.id.establishDate).text = entity.compare[i].establishDate
+                itemMemberView.findViewById<TextView>(R.id.location).text = entity.compare[i].location
+                layout_inform.addView(itemMemberView)
+                if (i != entity.members.size - 1) {
+                    val line = LineView(context)
+                    val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                    params.leftMargin = dp2px(8)
+                    params.rightMargin = dp2px(8)
+                    params.topMargin = dp2px(8)
+                    params.bottomMargin = dp2px(8)
+                    layout_inform.addView(line, params)
+                }
             }
         }
     }
-
 
     class LineView(context: Context) : View(context) {
         private val paint = Paint()
