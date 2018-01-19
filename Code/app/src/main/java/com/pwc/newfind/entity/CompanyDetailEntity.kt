@@ -69,7 +69,7 @@ class CompanyDetailEntity {
         var work: String? = work
     }
 
-    class CompareCompany constructor(establishDate: String?, fullName: String?, industry: String?, location: String?, logo: String?, name: String?, round: String?) {
+    class CompareCompany constructor(establishDate: String?, fullName: String?, industry: String?, location: String?, logo: String?, name: String?, round: String?, starred: Boolean?) {
         //"establishDate": "2014-04-18",
         var establishDate: String? = establishDate
         //"fullName": "\u6df1\u5733\u5e02\u7406\u7ea6\u4e91\u4fe1\u606f\u7ba1\u7406\u6709\u9650\u516c\u53f8",
@@ -84,5 +84,6 @@ class CompanyDetailEntity {
         var name: String? = name
         //"round": null
         var round: String? = round
+        var starred: Boolean? = starred
     }
 }

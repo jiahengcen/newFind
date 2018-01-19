@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.LinearLayout
+import com.pwc.newfind.Application
 import com.pwc.newfind.R
 import com.pwc.newfind.RetrofitHelper
 import com.pwc.newfind.bean.CompanyDetailBean
@@ -66,7 +67,7 @@ class CompanyDetailActivity : AppCompatActivity() {
     private fun load() {
         RetrofitHelper.getInstance(this)
                 .server
-                .companyDetailInformation("",companyCode)
+                .companyDetailInformation(Application.getInstances().userToken, companyCode)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<CompanyDetailBean> {
@@ -164,7 +165,8 @@ class CompanyDetailActivity : AppCompatActivity() {
                                             action.comp[i].location,
                                             action.comp[i].logo,
                                             action.comp[i].name,
-                                            action.comp[i].round
+                                            action.comp[i].round,
+                                            action.comp[i].starreda
                                     )
                                     companyDetailEntity.compare.add(item)
                                 }

@@ -18,6 +18,7 @@ interface RetrofitService {
 
     @GET(Constant.companySearch)
     fun companySearchResult(
+            @Header("Authorization") authorization: String,
             @Query("keyword") keyword: String
     ): Observable<CompanyTitleListBean>
 

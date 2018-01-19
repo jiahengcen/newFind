@@ -41,8 +41,7 @@ class SearchActivity : AppCompatActivity() {
             Log.e("HLA", "word" + word)
             sub = RetrofitHelper.getInstance(com.pwc.newfind.Application.appContext)
                     .server
-                    // .industryList()
-                    .companySearchResult(word!!)
+                    .companySearchResult(Application.getInstances().userToken, word!!)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : Observer<CompanyTitleListBean> {

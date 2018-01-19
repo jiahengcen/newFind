@@ -24,6 +24,7 @@ public class CompanyTitleListBean {
         public String name;
         public String round;
         public String establishDate;
+        public Boolean starred;
     }
 
 }

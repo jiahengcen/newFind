@@ -61,12 +61,23 @@ public class CompanyListAdapter extends BaseAdapter {
         }
         Glide.with(parent.getContext()).load(mData.get(position - 1).logo).into(viewHolder.titleIcon);
         viewHolder.companyName.setText(mData.get(position - 1).name);
-        //viewHolder.favourite.setText(mData.get(position - 1).f);
+        setFavourite(viewHolder.favourite, mData.get(position - 1).starred);
+        //.setText(mData.get(position - 1).f);
         viewHolder.fullCompanyName.setText(mData.get(position - 1).fullname);
         viewHolder.round.setText(mData.get(position - 1).round);
         viewHolder.establishDate.setText(mData.get(position - 1).establishDate);
         viewHolder.location.setText(mData.get(position - 1).location);
         return convertView;
+    }
+
+    private void setFavourite(TextView favourite, Boolean starred) {
+        if (starred) {
+            favourite.setText("已关注");
+            favourite.setTextColor(favourite.getContext().getResources().getColor(R.color.colorGray));
+        } else {
+            favourite.setText("关注");
+            favourite.setTextColor(favourite.getContext().getResources().getColor(R.color.colorRed));
+        }
     }
 
     private View getTitleView(View convertView, ViewGroup parent) {

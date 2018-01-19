@@ -20,15 +20,19 @@
         android:layout_alignTop="@+id/titleIcon"
         android:layout_marginStart="16dp"
         android:layout_toRightOf="@+id/titleIcon"
+        android:textSize="16dp"
+        android:textStyle="bold"
         tools:text="IT 桔子" />
 
     <TextView
         android:id="@+id/favourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/titleIcon"
+        android:layout_alignBottom="@+id/title"
         android:layout_marginStart="16dp"
         android:layout_toRightOf="@+id/title"
+
+        android:textSize="12dp"
         tools:text="已关注" />
 
     <TextView
@@ -39,6 +43,7 @@
         android:layout_marginStart="16dp"
         android:layout_toRightOf="@+id/titleIcon"
         android:text="TextView"
+        android:textSize="14dp"
         tools:text="IT桔子科技有限公司" />
 
 
@@ -49,6 +54,7 @@
         android:layout_below="@+id/titleIcon"
         android:layout_marginStart="16dp"
         android:text="TextView"
+        android:textSize="14dp"
         tools:text="B轮" />
 
     <TextView
@@ -59,6 +65,7 @@
         android:layout_marginStart="16dp"
         android:layout_toRightOf="@+id/round"
         android:text="TextView"
+        android:textSize="14dp"
         tools:text="2013-07" />
 
     <TextView
@@ -69,6 +76,7 @@
         android:layout_marginStart="16dp"
         android:layout_toRightOf="@+id/establishDate"
         android:text="TextView"
+        android:textSize="14dp"
         tools:text="北京" />
 
     <TextView

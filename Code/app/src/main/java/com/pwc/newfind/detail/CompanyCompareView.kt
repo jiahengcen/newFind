@@ -33,29 +33,26 @@ class CompanyCompareView(context: Context) : FrameLayout(context) {
                     val itemMemberView = LayoutInflater.from(context).inflate(R.layout.company_compare_card_view_content, null, false)
                     Glide.with(context).load(entity.compare[i].logo).into(itemMemberView.findViewById<CircleImageView>(R.id.titleIcon))
                     itemMemberView.findViewById<TextView>(R.id.title).text = entity.compare[i].name
-                    val detailTextView = itemMemberView.findViewById<TextView>(R.id.content)
-                    val button = itemMemberView.findViewById<TextView>(R.id.button)
-                    detailTextView.text = entity.members[i].description
-                    button.tag = "close"
-                    if (detailTextView.lineCount > 1) {
-                        button.visibility = View.VISIBLE
+                    itemMemberView.findViewById<TextView>(R.id.fullCompanyName).text = entity.compare[i].fullName
+                    val button = itemMemberView.findViewById<TextView>(R.id.favourite)
+                    button.tag = "true"
+                    if (entity.compare[i].starred ?: false) {
+                        button.text = "已关注"
                     } else {
-                        button.visibility = View.GONE
+                        button.text = "关注"
                     }
                     button.setOnClickListener(object : View.OnClickListener {
                         override fun onClick(v: View?) {
-                            if (button.tag == "close") {
-                                detailTextView.maxLines = 100
-                                button.tag = "open"
-                                button.text = "收起"
+                            if (button.tag == "true") {
+                                button.tag = "false"
                             } else {
-                                detailTextView.maxLines = 1
-                                button.tag = "close"
-                                button.text = "展开"
+                                button.tag = "true"
                             }
                         }
                     })
-
+                    itemMemberView.findViewById<TextView>(R.id.round).text = entity.compare[i].round
+                    itemMemberView.findViewById<TextView>(R.id.establishDate).text = entity.compare[i].establishDate
+                    itemMemberView.findViewById<TextView>(R.id.location).text = entity.compare[i].location
                     layout_inform.addView(itemMemberView)
                     if (i != entity.members.size - 1) {
                         val line = LineView(context)
@@ -74,9 +71,6 @@ class CompanyCompareView(context: Context) : FrameLayout(context) {
         }
     }
 
-    private fun getLegalPerson(member: CompanyDetailEntity.Member): String? {
-        return member.name + "-" + member.position
-    }
 
     class LineView(context: Context) : View(context) {
         private val paint = Paint()

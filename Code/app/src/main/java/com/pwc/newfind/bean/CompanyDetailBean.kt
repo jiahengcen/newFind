@@ -24,6 +24,7 @@ class CompanyDetailBean {
         var name: String? = null
         //"round": null
         var round: String? = null
+        var starreda :Boolean?=null
     }
 
     class Funding {
