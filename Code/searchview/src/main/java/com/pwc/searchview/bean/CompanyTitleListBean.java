@@ -17,8 +17,8 @@ public class CompanyTitleListBean {
 //        "logo": "https://www.xiniudata.com/file/59390aa5f04e153266cb752a",
 //        "name": "IT\u6854\u5b50"
 
-        public String companyCode;
-        public String fullname;
+        //public String companyCode;
+        public String fullName;
         public String location;
         public String logo;
         public String name;

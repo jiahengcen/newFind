@@ -8,6 +8,18 @@ class CompanyDetailBean {
     val funding: ArrayList<Funding>? = null
     var info: Information? = null
     var member: ArrayList<Member>? = null
+    var alexa: Alexa? = null
+
+    class Alexa {
+        var site: String? = null
+        var x: ArrayList<Int>? = null
+        var y: ArrayList<Y>? = null
+    }
+
+    class Y {
+        var rank: ArrayList<Int>? = null
+        var scope: String? = null
+    }
 
     class CompareCompany {
         //"establishDate": "2014-04-18",
@@ -24,7 +36,7 @@ class CompanyDetailBean {
         var name: String? = null
         //"round": null
         var round: String? = null
-        var starreda :Boolean?=null
+        var starreda: Boolean? = null
     }
 
     class Funding {
@@ -32,11 +44,12 @@ class CompanyDetailBean {
         var fundingDate: String? = null
         //"investment": 2500000,
         var investment: String? = null
-        //"investors": "",
-        var investors: String? = null
+        //"investors": ["朗玛峰创投","德同资本"],
+        var investors: ArrayList<String>? = null
         //"round": "\u79cd\u5b50\u8f6e"
         var round: String? = null
-
+        //"unit": "人民币"
+        var unit: String? = null
     }
 
     class Information {
@@ -58,6 +71,7 @@ class CompanyDetailBean {
         var name: String? = null
         //"round": "\u6218\u7565\u6295\u8d44",
         var round: String? = null
+        var starred: Boolean? = null
         //"tags": [
         //"\u77e5\u540d\u5a92\u4f53\u62a5\u9053",
         //"SaaS",

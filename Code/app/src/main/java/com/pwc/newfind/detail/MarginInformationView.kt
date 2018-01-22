@@ -65,11 +65,18 @@ class MarginInformationView(context: Context) : FrameLayout(context) {
     /**
      *
      */
-    private fun getInvestorsText(investors: String?): String? {
+    private fun getInvestorsText(investors: MutableList<String>?): String? {
+        var investor = ""
         if (investors != null) {
-            return investors
+            for (i in 0..investors.size - 1) {
+                if (i == investors.size - 1) {
+                    investor = investors[i]
+                } else {
+                    investor = (investors[i] + ",")
+                }
+            }
         }
-        return investors
+        return investor
     }
 
     class LineView(context: Context) : View(context) {

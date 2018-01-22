@@ -28,6 +28,7 @@ class FavouriteCompanyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         //添加Flag把状态栏设为可绘制模式
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         //设置状态栏颜色

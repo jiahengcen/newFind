@@ -63,7 +63,7 @@ public class CompanyListAdapter extends BaseAdapter {
         viewHolder.companyName.setText(mData.get(position - 1).name);
         setFavourite(viewHolder.favourite, mData.get(position - 1).starred);
         //.setText(mData.get(position - 1).f);
-        viewHolder.fullCompanyName.setText(mData.get(position - 1).fullname);
+        viewHolder.fullCompanyName.setText(mData.get(position - 1).fullName);
         viewHolder.round.setText(mData.get(position - 1).round);
         viewHolder.establishDate.setText(mData.get(position - 1).establishDate);
         viewHolder.location.setText(mData.get(position - 1).location);

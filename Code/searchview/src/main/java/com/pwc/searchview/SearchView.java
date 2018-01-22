@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -301,7 +302,7 @@ public class SearchView extends LinearLayout {
 
         // 3. 搜索框背景颜色
         search_block = (LinearLayout) findViewById(R.id.search_block);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) search_block.getLayoutParams();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) search_block.getLayoutParams();
         params.height = searchBlockHeight;
         search_block.setBackgroundColor(searchBlockColor);
         search_block.setLayoutParams(params);
@@ -342,8 +343,6 @@ public class SearchView extends LinearLayout {
         } else {
             tv_clear.setVisibility(INVISIBLE);
         }
-        ;
-
     }
 
     /**

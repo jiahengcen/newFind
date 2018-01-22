@@ -18,13 +18,13 @@ object Constant {
     const val companySearch = "company/search"
     //const val companySearch = "company/search?keyword="
     /**
-     * 公司基本信息：/company/info?companyCode=suiyuejiezi
+     * 公司基本信息：/company/info?fullName=suiyuejiezi
      */
     const val companyBaseInformation = "company/info"
     /**
-     * 公司团队信息：/company/member?companyCode=suiyuejiezi
+     * 公司团队信息：/company/member?fullName=北京决策信诚科技有限公司
      */
-    const val companyMember = "$host/company/member?companyCode="
+    const val companyMember = "$host/company/member?fullName="
     /**
      * 公司融资信息：/company/funding?companyCode=suiyuejiezi
      */
@@ -34,6 +34,7 @@ object Constant {
      * 公司详情信息http://47.100.119.94:8081/v1/company/detail?companyCode=zuitaokeji
      */
     const val detailCompany = "company/detail"
+
     const val getToken="user/get_token"
 }
 

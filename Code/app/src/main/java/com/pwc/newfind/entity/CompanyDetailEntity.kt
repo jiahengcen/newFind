@@ -40,15 +40,16 @@ class CompanyDetailEntity {
     var marginInformation: MutableList<Funding> = mutableListOf()
     var members: MutableList<Member> = mutableListOf()
     var compare: MutableList<CompareCompany> = mutableListOf()
+    var alexa: Alexa? = null
 
-    class Funding constructor(funding: String?, investment: String?, investors: String?, round: String?) {
+    class Funding constructor(funding: String?, investment: String?, investors: MutableList<String>?, round: String?) {
 
         //"fundingDate": "2011-04-01",
         var fundingDate: String? = funding
         //"investment": 2500000,
         var investment: String? = investment
         //"investors": "",
-        var investors: String? = investors
+        var investors: MutableList<String>? = investors
         //"round": "\u79cd\u5b50\u8f6e"
         var round: String? = round
 
@@ -85,5 +86,16 @@ class CompanyDetailEntity {
         //"round": null
         var round: String? = round
         var starred: Boolean? = starred
+    }
+
+    class Alexa {
+        var site: String? = null
+        var x: ArrayList<Int>? = null
+        var y: MutableList<Y> = mutableListOf()
+    }
+
+    class Y {
+        var rank: ArrayList<Int>? = null
+        var scope: String? = null
     }
 }

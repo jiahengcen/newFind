@@ -24,13 +24,13 @@ interface RetrofitService {
 
     @GET(Constant.companyBaseInformation)
     fun companyBaseInformation(
-            @Query("companyCode") companyCode: String
+            @Query("fullName") fullName: String
     ): Observable<CompanyBaseInfoBean>
 
     @GET(Constant.detailCompany)
     fun companyDetailInformation(
             @Header("Authorization") authorization: String,
-            @Query("companyCode") companyCode: String
+            @Query("fullName") fullName: String
     ): Observable<CompanyDetailBean>
 
     @GET(Constant.getToken)

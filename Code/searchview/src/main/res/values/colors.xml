@@ -5,4 +5,5 @@
     <color name="colorText">#9b9b9b</color>
     <color name="colorGray">#a9a9a9</color>
     <color name="colorRed">#E0301E</color>
+    <color name="titleTextColor">#96876D</color>
 </resources>

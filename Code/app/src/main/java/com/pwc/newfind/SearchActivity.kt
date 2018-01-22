@@ -63,9 +63,9 @@ class SearchActivity : AppCompatActivity() {
         }
 
         searchView!!.setCompanyOnItemClickListener(SearchView.OnCompanyItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long, bean: CompanyTitleListBean.CompanyTitleSubBean? ->
-            Log.e("HLA", "onClick" + bean!!.companyCode)
+            Log.e("HLA", "onClick" + bean!!.fullName)
             val intent = Intent(this@SearchActivity, CompanyDetailActivity::class.java)
-            intent.putExtra(CompanyDetailActivity.COMPANY_CODE, bean!!.companyCode)
+            intent.putExtra(CompanyDetailActivity.COMPANY_CODE, bean!!.fullName)
             startActivity(intent)
 
         })
