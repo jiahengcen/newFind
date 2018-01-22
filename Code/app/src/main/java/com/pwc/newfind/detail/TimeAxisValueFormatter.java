@@ -26,7 +26,6 @@ public class TimeAxisValueFormatter implements IAxisValueFormatter {
 
     @Override
     public String getFormattedValue(float value, AxisBase axis) {
-        Log.e("HLA", "value:" + value);
         try {
             return TimeUtil.getDayString(new SimpleDateFormat("yyyyMM"), startDay, (int) value);
         } catch (ParseException e) {
