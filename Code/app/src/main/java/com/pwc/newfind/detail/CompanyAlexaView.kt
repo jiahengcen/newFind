@@ -56,8 +56,10 @@ class CompanyAlexaView(context: Context) : FrameLayout(context) {
             Log.e("HLA", "" + x.size)
             //设置描述信息
             chart.description.text = ""
+
             //设置X轴显示内容
             val xAxis = chart.xAxis
+
             xAxis.valueFormatter = TimeAxisValueFormatter(x[0].toString())
             initSingleLineChart(context, chart, cnValue as ArrayList<Entry>)
         } catch (e: ParseException) {
@@ -73,7 +75,7 @@ class CompanyAlexaView(context: Context) : FrameLayout(context) {
      */
     private fun initDataStyle(context: Context, mLineChart: LineChart) {
         //设置图表是否支持触控操作
-        mLineChart.setTouchEnabled(false)
+        mLineChart.setTouchEnabled(true)
         mLineChart.setScaleEnabled(false)
         //设置点击折线点时，显示其数值
         //        MyMakerView mv = new MyMakerView(context, R.layout.item_mark_layout);
@@ -83,13 +85,15 @@ class CompanyAlexaView(context: Context) : FrameLayout(context) {
         title.form = Legend.LegendForm.LINE
         //设置x轴的样式
         val xAxis = mLineChart.xAxis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        //xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.axisLineColor = Color.parseColor("#66CDAA")
-        xAxis.setAxisLineWidth(5F)
+        xAxis.axisLineWidth = 5F
         xAxis.setDrawGridLines(false)
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+
 
         //设置是否显示x轴
-        xAxis.setEnabled(true)
+        xAxis.isEnabled = true
 
         //设置左边y轴的样式
         val yAxisLeft = mLineChart.getAxisLeft()

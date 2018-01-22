@@ -1,7 +1,5 @@
 package com.pwc.newfind.detail;
 
-import android.util.Log;
-
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.pwc.newfind.util.TimeUtil;
