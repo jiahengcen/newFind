@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import com.pwc.newfind.detail.CompanyDetailActivity
+import com.pwc.newfind.net.RetrofitHelper
 import com.pwc.searchview.CompanyListAdapter
 import com.pwc.searchview.SearchView
 import com.pwc.searchview.bean.CompanyTitleListBean

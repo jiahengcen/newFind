@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import com.pwc.newfind.bean.IndustryListBean
+import com.pwc.newfind.net.RetrofitHelper
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

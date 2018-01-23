@@ -1,14 +1,12 @@
-package com.pwc.newfind
+package com.pwc.newfind.net
 
+import com.pwc.newfind.Constant
 import com.pwc.newfind.bean.CompanyBaseInfoBean
 import com.pwc.newfind.bean.CompanyDetailBean
 import com.pwc.newfind.bean.IndustryListBean
-import com.pwc.newfind.bean.Token
 import com.pwc.searchview.bean.CompanyTitleListBean
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
+import retrofit2.http.*
 import rx.Observable
 
 
@@ -35,4 +33,11 @@ interface RetrofitService {
 
     @GET(Constant.getToken)
     fun getUserToken(): Call<String>
+
+    @POST(Constant.actionStarCompany)
+    fun actionStarCompany(
+
+
+
+    ): Call<String>
 }

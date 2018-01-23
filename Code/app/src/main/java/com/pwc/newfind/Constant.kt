@@ -36,5 +36,9 @@ object Constant {
     const val detailCompany = "company/detail"
 
     const val getToken="user/get_token"
+    /**
+     * 操作关注的公司
+     */
+    const val actionStarCompany="user/starCompany"
 }
 

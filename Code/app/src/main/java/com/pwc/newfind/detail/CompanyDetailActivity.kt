@@ -12,7 +12,7 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import com.pwc.newfind.Application
 import com.pwc.newfind.R
-import com.pwc.newfind.RetrofitHelper
+import com.pwc.newfind.net.RetrofitHelper
 import com.pwc.newfind.bean.CompanyDetailBean
 import com.pwc.newfind.entity.CompanyDetailEntity
 import kotlinx.android.synthetic.main.company_favourite_activity.*
@@ -73,7 +73,7 @@ class CompanyDetailActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.detail_company, menu)
         return true
     }
 

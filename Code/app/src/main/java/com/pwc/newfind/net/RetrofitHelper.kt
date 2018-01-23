@@ -1,24 +1,37 @@
-package com.pwc.newfind
+package com.pwc.newfind.net
 
 import android.content.Context
-
-import com.google.gson.GsonBuilder
+import com.pwc.newfind.Constant
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 class RetrofitHelper private constructor(private val context: Context) {
 
-    internal var client = OkHttpClient()
+    var client = getOkHttpClient()
     private var mRetrofit: Retrofit? = null
     val server: RetrofitService
         get() = mRetrofit!!.create(RetrofitService::class.java)
 
     init {
         resetApp()
+    }
+
+    private fun getOkHttpClient(): OkHttpClient {
+        //定制OkHttp
+        val httpClientBuilder = OkHttpClient.Builder()
+        //设置超时时间
+        httpClientBuilder.connectTimeout(NetConfig.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+        // httpClientBuilder.writeTimeout(NetConfig.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+        //httpClientBuilder.readTimeout(NetConfig.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+        //使用拦截器
+        httpClientBuilder.addInterceptor(RequestInterceptor())
+        // httpClientBuilder.addInterceptor(LogInterceptor())
+        return httpClientBuilder.build()
     }
 
     private fun resetApp() {
