@@ -22,6 +22,7 @@ class CompanyDetailEntity {
     var name: String? = null
     //"round": "B轮"
     var round: String? = null
+    var star: Boolean = false
     //"website": "https://itjuzi.com/"
     var website: String? = null
     //"tags": [

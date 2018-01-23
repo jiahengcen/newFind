@@ -19,13 +19,15 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         company.setOnClickListener(this)
+        industry.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.company ->
                 startActivity(Intent(activity, FavouriteCompanyActivity::class.java))
-
+            R.id.industry ->
+                startActivity(Intent(activity, FavouriteIndustryActivity::class.java))
         }
     }
 

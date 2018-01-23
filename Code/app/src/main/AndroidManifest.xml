@@ -55,7 +55,11 @@
 
         <activity
             android:name=".FavouriteCompanyActivity"
-            android:label="@string/app_name"
+            android:label="关注公司"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FavouriteIndustryActivity"
+            android:label="关注行业"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

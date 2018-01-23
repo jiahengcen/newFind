@@ -41,6 +41,7 @@
         <!--android:background="#F1F1F1" />-->
 
     <LinearLayout
+        android:id="@+id/industry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"

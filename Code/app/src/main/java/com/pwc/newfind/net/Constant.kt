@@ -1,4 +1,4 @@
-package com.pwc.newfind
+package com.pwc.newfind.net
 
 /**
  * Created by lhuang126 on 1/11/2018.
@@ -21,14 +21,7 @@ object Constant {
      * 公司基本信息：/company/info?fullName=suiyuejiezi
      */
     const val companyBaseInformation = "company/info"
-    /**
-     * 公司团队信息：/company/member?fullName=北京决策信诚科技有限公司
-     */
-    const val companyMember = "$host/company/member?fullName="
-    /**
-     * 公司融资信息：/company/funding?companyCode=suiyuejiezi
-     */
-    const val companyFunding = "$host/company/funding?companyCode="
+
 
     /**
      * 公司详情信息http://47.100.119.94:8081/v1/company/detail?companyCode=zuitaokeji
@@ -40,5 +33,14 @@ object Constant {
      * 操作关注的公司
      */
     const val actionStarCompany="user/starCompany"
+    /**
+     * 获取关注的公司
+     */
+    const val getStarCompany="user/starCompany"
+    /**
+     * 获取新闻列表
+     */
+    const val subscription="user/news"
+    const val actionStarIndustry="user/starIndustry"
 }
 

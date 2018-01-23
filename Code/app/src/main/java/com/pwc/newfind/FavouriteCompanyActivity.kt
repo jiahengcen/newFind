@@ -1,6 +1,7 @@
 package com.pwc.newfind
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.graphics.Color
@@ -15,8 +16,16 @@ import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.pwc.newfind.bean.ActionStartCompanyBean
+import com.pwc.newfind.bean.FavouriteCompanyBean
+import com.pwc.newfind.bean.PostResult
+import com.pwc.newfind.net.RetrofitHelper
 import com.pwc.swipemenulistview.*
 import kotlinx.android.synthetic.main.company_favourite_activity.*
+import rx.Subscriber
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 /**
  * Created by lhuang126 on 1/14/2018.
@@ -25,7 +34,7 @@ class FavouriteCompanyActivity : AppCompatActivity() {
     private val mListView by lazy {
         findViewById<SwipeMenuListView>(R.id.listView);
     }
-
+    val listAdapter by lazy { ListAdapter(this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,8 +44,38 @@ class FavouriteCompanyActivity : AppCompatActivity() {
         window.statusBarColor = Color.rgb(0xC5, 0x2A, 0x1A)
         setContentView(R.layout.company_favourite_activity)
         setSupportActionBar(toolbar)
-        val listAdapter = ListAdapter()
-        listAdapter.mAppList = Test.getStrings() as MutableList<String>
+        setListView()
+        loadDate()
+    }
+
+    private fun loadDate() {
+        RetrofitHelper.getInstance(this)
+                .server
+                .getStarCompany(Application.getInstances().userToken)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Subscriber<FavouriteCompanyBean>() {
+                    override fun onError(e: Throwable?) {
+                    }
+
+                    override fun onCompleted() {
+                    }
+
+                    override fun onNext(t: FavouriteCompanyBean?) {
+                        val data = mutableListOf<FavouriteDate>()
+                        for (item in t?.starCompanyList!!) {
+                            data.add(FavouriteDate(item.logo, item.fullName))
+                        }
+                        listAdapter.mAppList = data
+                        listAdapter.notifyDataSetChanged()
+                    }
+
+                })
+    }
+
+    private fun setListView() {
+
+        //listAdapter.mAppList = Test.getStrings() as MutableList<String>
         mListView.adapter = listAdapter
         val creator = object : SwipeMenuCreator {
             override fun create(menu: SwipeMenu?) {
@@ -63,16 +102,9 @@ class FavouriteCompanyActivity : AppCompatActivity() {
             val item = listAdapter.getItem(position)
             when (index) {
                 0 -> {
-                    // open
-                    // open(item as ApplicationInfo)
+                    deleteItem(item)
+                    listAdapter.mAppList!!.removeAt(position)
                     listAdapter.notifyDataSetChanged()
-                }
-
-                1 -> {
-                    // delete
-                    //					delete(item);
-                    //  listAdapter.removeAt(position)
-                    //
                 }
             }
             false
@@ -98,13 +130,36 @@ class FavouriteCompanyActivity : AppCompatActivity() {
         })
 
         // other setting
-//		listView.setCloseInterpolator(new BounceInterpolator());
+        //		listView.setCloseInterpolator(new BounceInterpolator());
 
         // test item long click
         mListView.onItemLongClickListener = AdapterView.OnItemLongClickListener { parent, view, position, id ->
             Toast.makeText(applicationContext, position.toString() + " long click", Toast.LENGTH_SHORT).show()
             false
         }
+    }
+
+    private fun deleteItem(item: FavouriteDate) {
+        val action = ActionStartCompanyBean()
+        action.actionType = "delete"
+        action.fullName = arrayListOf<String>(item.name!!)
+        RetrofitHelper.getInstance(this)
+                .server
+                .actionStarCompany(Application.getInstances().userToken, action)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Subscriber<PostResult>() {
+                    override fun onError(e: Throwable?) {
+                    }
+
+                    override fun onCompleted() {
+                    }
+
+                    override fun onNext(t: PostResult?) {
+
+                    }
+
+                })
     }
 
     private fun open(item: ApplicationInfo) {
@@ -134,13 +189,19 @@ class FavouriteCompanyActivity : AppCompatActivity() {
                 resources.displayMetrics).toInt()
     }
 
-    class ListAdapter : BaseSwipListAdapter() {
-        var mAppList: MutableList<String>? = null
+    class FavouriteDate constructor(iconUrl: String?, name: String?) {
+        var iconUrl: String? = iconUrl
+        var name: String? = name
+    }
+
+    class ListAdapter constructor(context: Context) : BaseSwipListAdapter() {
+        val context = context
+        var mAppList: MutableList<FavouriteDate>? = mutableListOf()
         override fun getCount(): Int {
             return mAppList!!.size
         }
 
-        override fun getItem(position: Int): String {
+        override fun getItem(position: Int): FavouriteDate {
             return mAppList!![position]
         }
 
@@ -156,11 +217,8 @@ class FavouriteCompanyActivity : AppCompatActivity() {
                 ViewHolder(convertView)
             }
             val holder = convertView!!.tag as ViewHolder
-            val item = getItem(position)
-            //holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()))
-            //holder.tv_name.text = item.loadLabel(getPackageManager())
-            //holder.iv_icon.setOnClickListener { Toast.makeText(this@SimpleActivity, "iv_icon_click", Toast.LENGTH_SHORT).show() }
-            //holder.tv_name.setOnClickListener { Toast.makeText(this@SimpleActivity, "iv_icon_click", Toast.LENGTH_SHORT).show() }
+            Glide.with(context).load(mAppList!![position].iconUrl).into(holder.iv_icon)
+            holder.tv_name.text = mAppList!![position].name
             return convertView
         }
 

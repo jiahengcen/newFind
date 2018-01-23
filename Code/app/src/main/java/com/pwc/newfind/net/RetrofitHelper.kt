@@ -1,7 +1,6 @@
 package com.pwc.newfind.net
 
 import android.content.Context
-import com.pwc.newfind.Constant
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

@@ -8,6 +8,7 @@ import com.pwc.newfind.db.DaoMaster;
 import com.pwc.newfind.db.DaoSession;
 import com.pwc.newfind.db.UserDao;
 import com.pwc.newfind.db.entity.User;
+import com.pwc.newfind.net.Constant;
 import com.pwc.newfind.net.RetrofitService;
 
 import java.util.List;

@@ -1,9 +1,6 @@
 package com.pwc.newfind.net
 
-import com.pwc.newfind.Constant
-import com.pwc.newfind.bean.CompanyBaseInfoBean
-import com.pwc.newfind.bean.CompanyDetailBean
-import com.pwc.newfind.bean.IndustryListBean
+import com.pwc.newfind.bean.*
 import com.pwc.searchview.bean.CompanyTitleListBean
 import retrofit2.Call
 import retrofit2.http.*
@@ -34,10 +31,25 @@ interface RetrofitService {
     @GET(Constant.getToken)
     fun getUserToken(): Call<String>
 
+    @GET(Constant.getStarCompany)
+    fun getStarCompany(
+            @Header("Authorization") authorization: String
+    ): Observable<FavouriteCompanyBean>
+
     @POST(Constant.actionStarCompany)
     fun actionStarCompany(
+            @Header("Authorization") authorization: String,
+            @Body action: ActionStartCompanyBean
+    ): Observable<PostResult>
 
+    @POST(Constant.actionStarIndustry)
+    fun actionStarIndustry(
+            @Header("Authorization") authorization: String,
+            @Body action: ActionStartIndustryBean
+    ): Observable<PostResult>
 
-
-    ): Call<String>
+    @GET(Constant.actionStarIndustry)
+    fun getStarIndustry(
+            @Header("Authorization") authorization: String
+    ): Observable<FavouriteIndustryBean>
 }

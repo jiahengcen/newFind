@@ -13,12 +13,19 @@ class IndustryAdapter constructor(array: MutableList<String>) : RecyclerView.Ada
     constructor() : this(arrayListOf()) {
     }
 
-    var dataList: MutableList<String> = array
+    private var dataList: MutableList<String> = array
     private lateinit var listener: OnSelectListener
 
     var selectDataSet: MutableSet<String> = mutableSetOf()
     override fun onBindViewHolder(holder: IndustryViewHolder?, position: Int) {
         holder!!.textView.text = dataList[position]
+        if (selectDataSet.any { it == (holder.textView.text.toString()) }) {
+            holder.textView.setBackgroundResource(R.drawable.text_red_bg)
+            holder.textView.setTextColor(holder.textView.context.resources.getColor(R.color.white))
+        } else {
+            holder.textView.setBackgroundResource(R.drawable.text_grey_bg)
+            holder.textView.setTextColor(holder.textView.context.resources.getColor(R.color.black))
+        }
         holder.textView.setOnClickListener {
             if (selectDataSet.any { it == (holder.textView.text.toString()) }) {
                 selectDataSet.remove(holder.textView.text.toString())
@@ -60,5 +67,11 @@ class IndustryAdapter constructor(array: MutableList<String>) : RecyclerView.Ada
 
     class IndustryViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView!!.findViewById(R.id.text)
+    }
+
+    fun reSetSelectData(selectSet: MutableSet<String>) {
+        selectDataSet = selectSet
+        notifyDataSetChanged()
+
     }
 }

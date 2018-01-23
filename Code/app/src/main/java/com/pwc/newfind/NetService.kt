@@ -1,6 +1,7 @@
 package com.pwc.newfind
 
 import com.pwc.newfind.bean.IndustryListBean
+import com.pwc.newfind.net.Constant
 import retrofit2.http.GET
 import rx.Observable
 

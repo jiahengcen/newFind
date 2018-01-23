@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.pwc.newfind.view.FluidLayout
 import com.pwc.newfind.R
 import com.pwc.newfind.entity.CompanyDetailEntity
+import com.pwc.newfind.net.Helper
 
 /**
  * Created by lhuang126 on 1/10/2018.
@@ -19,7 +20,7 @@ import com.pwc.newfind.entity.CompanyDetailEntity
 class CompanyTitleCardView constructor(context: Context) : FrameLayout(context) {
     private val titleIcon: ImageView by lazy { findViewById<ImageView>(R.id.titleIcon) }
     private val title: TextView by lazy { findViewById<TextView>(R.id.title) }
-    private val favourite: TextView by lazy { findViewById<TextView>(R.id.favourite) }
+    private val favourite: ImageView by lazy { findViewById<ImageView>(R.id.favourite) }
     private val round: TextView by lazy { findViewById<TextView>(R.id.round) }
     private val establishDate: TextView by lazy { findViewById<TextView>(R.id.establishDate) }
     private val location: TextView by lazy { findViewById<TextView>(R.id.location) }
@@ -43,7 +44,22 @@ class CompanyTitleCardView constructor(context: Context) : FrameLayout(context) 
     fun setData(entity: CompanyDetailEntity) {
         setTitleImage(entity.logo)
         title.text = entity.name
-        favourite.text = ""
+        if (entity.star) {
+            favourite.setImageResource(R.drawable.ic_grade)
+        } else {
+            favourite.setImageResource(R.drawable.ic_grade_unselect)
+        }
+        favourite.setOnClickListener({
+            if (entity.star) {
+                Helper.actionStarCompany(context, entity.fullName, "delete")
+                favourite.setImageResource(R.drawable.ic_grade_unselect)
+                entity.star = false
+            } else {
+                favourite.setImageResource(R.drawable.ic_grade)
+                Helper.actionStarCompany(context, entity.fullName, "insert")
+                entity.star = true
+            }
+        })
         round.text = entity.round
         establishDate.text = entity.establishDate
         location.text = entity.location
