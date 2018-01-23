@@ -1,89 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
 
-    <ImageView
-        android:id="@+id/titleIcon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:srcCompat="@drawable/clear" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/titleIcon"
-        android:layout_marginStart="16dp"
-        android:layout_toRightOf="@+id/titleIcon"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        tools:text="IT 桔子" />
+        <ImageView
+            android:id="@+id/titleIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/clear" />
 
-    <TextView
-        android:id="@+id/favourite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/title"
-        android:layout_marginStart="16dp"
-        android:layout_toRightOf="@+id/title"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/titleIcon"
+            android:layout_marginStart="16dp"
+            android:layout_toRightOf="@+id/titleIcon"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            tools:text="IT 桔子" />
 
-        android:textSize="12dp"
-        tools:text="已关注" />
+        <TextView
+            android:id="@+id/favourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/title"
+            android:layout_marginStart="16dp"
+            android:layout_toRightOf="@+id/title"
+            android:textSize="12dp"
+            tools:text="已关注" />
 
-    <TextView
-        android:id="@+id/fullCompanyName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_marginStart="16dp"
-        android:layout_toRightOf="@+id/titleIcon"
-        android:text="TextView"
-        android:textSize="14dp"
-        tools:text="IT桔子科技有限公司" />
+        <TextView
+            android:id="@+id/fullCompanyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginStart="16dp"
+            android:layout_toRightOf="@+id/titleIcon"
+            android:textSize="14dp"
+            tools:text="IT桔子科技有限公司" />
 
 
-    <TextView
-        android:id="@+id/round"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleIcon"
-        android:layout_marginStart="16dp"
-        android:text="TextView"
-        android:textSize="14dp"
-        tools:text="B轮" />
+        <TextView
+            android:id="@+id/round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleIcon"
+            android:layout_marginStart="16dp"
+            android:textSize="14dp"
+            tools:text="B轮" />
 
-    <TextView
-        android:id="@+id/establishDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleIcon"
-        android:layout_marginStart="16dp"
-        android:layout_toRightOf="@+id/round"
-        android:text="TextView"
-        android:textSize="14dp"
-        tools:text="2013-07" />
+        <TextView
+            android:id="@+id/establishDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleIcon"
+            android:layout_marginStart="16dp"
+            android:layout_toRightOf="@+id/round"
+            android:textSize="14dp"
+            tools:text="2013-07" />
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleIcon"
-        android:layout_marginStart="16dp"
-        android:layout_toRightOf="@+id/establishDate"
-        android:text="TextView"
-        android:textSize="14dp"
-        tools:text="北京" />
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleIcon"
+            android:layout_marginStart="16dp"
+            android:layout_toRightOf="@+id/establishDate"
+            android:textSize="14dp"
+            tools:text="北京" />
 
-    <TextView
-        android:id="@+id/industry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/industry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
-</RelativeLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
