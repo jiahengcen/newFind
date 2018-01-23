@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.util.TypedValue
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -70,6 +71,12 @@ class CompanyDetailActivity : AppCompatActivity() {
         load()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
     private fun load() {
         RetrofitHelper.getInstance(this)
                 .server
@@ -118,7 +125,7 @@ class CompanyDetailActivity : AppCompatActivity() {
                              * part 3 融资信息
                              */
                             if (action?.funding != null) {
-                                for (i in 0..action.funding.size - 1) {
+                                for (i in action.funding.indices) {
                                     val item = CompanyDetailEntity.Funding(action.funding[i].fundingDate, action.funding[i].investment, action.funding[i].investors, action.funding[i].round)
                                     companyDetailEntity.marginInformation.add(item)
                                 }
@@ -130,7 +137,7 @@ class CompanyDetailActivity : AppCompatActivity() {
                              */
                             if (action?.member != null) {
                                 try {
-                                    for (i in 0..action.member!!.size - 1) {
+                                    for (i in action.member!!.indices) {
                                         val item = CompanyDetailEntity.Member(
                                                 action.member!![i].description,
                                                 action.member!![i].education,
