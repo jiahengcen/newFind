@@ -54,11 +54,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    fun firstGo(navigationView: NavigationView) {
+    private fun firstGo(navigationView: NavigationView) {
         navigationView.getMenu().getItem(0).setChecked(true);
         val ft = fragmentManager.beginTransaction()
         ft.replace(R.id.content_view, SubscriptionFragment(), "Subscription");
         ft.commitAllowingStateLoss()
+        toolbar.title = "订阅"
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -69,21 +70,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val ft = fragmentManager.beginTransaction()
                 ft.replace(R.id.content_view, SubscriptionFragment(), "Subscription");
                 ft.commitAllowingStateLoss()
-
+                toolbar.title = "订阅"
             }
             R.id.nav_finding -> {
-
+                toolbar.title = "发现"
             }
             R.id.nav_slideshow -> {
-
+                toolbar.title = "报告"
             }
             R.id.nav_industry -> {
-
+                toolbar.title = "行业"
             }
             R.id.nav_setting -> {
                 val ft = fragmentManager.beginTransaction()
                 ft.replace(R.id.content_view, SettingsFragment(), "Settings");
                 ft.commitAllowingStateLoss()
+                toolbar.title = "个人设置"
             }
         }
 
