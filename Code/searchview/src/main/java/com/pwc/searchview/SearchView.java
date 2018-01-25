@@ -363,7 +363,7 @@ public class SearchView extends LinearLayout {
     private boolean hasData(String tempName) {
         // 从数据库中Record表里找到name=tempName的id
         Cursor cursor = helper.getReadableDatabase().rawQuery(
-                "select id as _id,name from records where name =?", new String[]{tempName});
+                "select id as _id,name from records where name =? ", new String[]{tempName});
         //  判断是否有下一个
         return cursor.moveToNext();
     }

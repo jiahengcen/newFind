@@ -5,8 +5,10 @@ package com.pwc.newfind.bean
  */
 class SubscriptionBean {
     var title: String? = null
-    var subTitle:String?=null
-    var time:String?=null
+    var subTitle: String? = null
+    var time: String? = null
     var content: String? = null
-
+    var fullName: String? = null
+    var iconUrl:String?=null
+    var webSite:String?=null
 }

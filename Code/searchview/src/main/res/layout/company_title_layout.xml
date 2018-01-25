@@ -4,8 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     android:paddingBottom="8dp"
-    android:paddingTop="8dp">
+    android:paddingTop="8dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -57,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/titleIcon"
             android:layout_marginStart="16dp"
+            android:minWidth="30dp"
             android:textSize="14dp"
             tools:text="B轮" />
 
@@ -67,6 +73,7 @@
             android:layout_below="@+id/titleIcon"
             android:layout_marginStart="16dp"
             android:layout_toRightOf="@+id/round"
+            android:minWidth="40dp"
             android:textSize="14dp"
             tools:text="2013-07" />
 

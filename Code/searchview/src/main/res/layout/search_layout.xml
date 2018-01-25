@@ -52,6 +52,7 @@
 
             <com.pwc.searchview.SearchListView
                 android:id="@+id/listView"
+                android:dividerHeight="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

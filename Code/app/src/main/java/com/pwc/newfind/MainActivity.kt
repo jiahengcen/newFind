@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.pwc.newfind.finding.FindingFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun firstGo(navigationView: NavigationView) {
         navigationView.getMenu().getItem(0).setChecked(true);
-        val ft = fragmentManager.beginTransaction()
+        val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.content_view, SubscriptionFragment(), "Subscription");
         ft.commitAllowingStateLoss()
         toolbar.title = "订阅"
@@ -67,12 +68,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_favourite -> {
 
-                val ft = fragmentManager.beginTransaction()
+                val ft = supportFragmentManager.beginTransaction()
                 ft.replace(R.id.content_view, SubscriptionFragment(), "Subscription");
                 ft.commitAllowingStateLoss()
                 toolbar.title = "订阅"
             }
             R.id.nav_finding -> {
+                val ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.content_view, FindingFragment(), "finding");
+                ft.commitAllowingStateLoss()
                 toolbar.title = "发现"
             }
             R.id.nav_slideshow -> {
@@ -82,7 +86,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 toolbar.title = "行业"
             }
             R.id.nav_setting -> {
-                val ft = fragmentManager.beginTransaction()
+                val ft = supportFragmentManager.beginTransaction()
                 ft.replace(R.id.content_view, SettingsFragment(), "Settings");
                 ft.commitAllowingStateLoss()
                 toolbar.title = "个人设置"
