@@ -1,4 +1,4 @@
-package com.pwc.newfind
+package com.pwc.newfind.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,11 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.pwc.newfind.R
+import com.pwc.newfind.setting.SettingsFragment
 import com.pwc.newfind.finding.FindingFragment
+import com.pwc.newfind.report.ResearchFragment
+import com.pwc.newfind.subscription.SubscriptionFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -80,6 +84,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 toolbar.title = "发现"
             }
             R.id.nav_slideshow -> {
+                val ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.content_view, ResearchFragment(), "research");
+                ft.commitAllowingStateLoss()
                 toolbar.title = "报告"
             }
             R.id.nav_industry -> {

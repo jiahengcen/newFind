@@ -1,4 +1,4 @@
-package com.pwc.newfind
+package com.pwc.newfind.subscription
 
 
 import android.os.Bundle
@@ -10,6 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.pwc.newfind.R
+import com.pwc.newfind.base.Application
 import com.pwc.newfind.bean.NewsBean
 import com.pwc.newfind.bean.SubscriptionBean
 import com.pwc.newfind.net.RetrofitHelper

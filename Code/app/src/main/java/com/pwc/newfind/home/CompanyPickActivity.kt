@@ -1,4 +1,4 @@
-package com.pwc.newfind
+package com.pwc.newfind.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import com.pwc.newfind.NetService
+import com.pwc.newfind.R
+import com.pwc.newfind.TestSubscriptionBean
 import com.pwc.newfind.bean.IndustryListBean
 import com.pwc.newfind.net.Constant
 import com.pwc.newfind.net.RetrofitHelper

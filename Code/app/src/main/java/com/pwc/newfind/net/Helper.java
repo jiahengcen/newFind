@@ -3,14 +3,14 @@ package com.pwc.newfind.net;
 import android.content.Context;
 import android.util.Log;
 
-import com.pwc.newfind.Application;
+import com.pwc.newfind.base.Application;
 import com.pwc.newfind.bean.ActionStartCompanyBean;
 import com.pwc.newfind.bean.ActionStartIndustryBean;
 import com.pwc.newfind.bean.PostResult;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -62,11 +62,22 @@ public class Helper {
                     .actionStarIndustry(Application.getInstances().getUserToken(), actionStartIndustryBean)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Action1<PostResult>() {
+                    .subscribe(new Subscriber<PostResult>() {
                         @Override
-                        public void call(PostResult postResult) {
-                            Log.e("HLA", "actionStarIndustry,"+postResult.getMsg());
+                        public void onCompleted() {
+
                         }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onNext(PostResult postResult) {
+                            Log.e("HLA", "actionStarIndustry," + postResult.getMsg());
+                        }
+
                     });
         } catch (Exception e) {
             Log.e("HLA", "actionStarCompany error, e:" + e.getMessage());

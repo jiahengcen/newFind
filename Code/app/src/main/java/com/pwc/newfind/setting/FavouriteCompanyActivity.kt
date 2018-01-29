@@ -1,4 +1,4 @@
-package com.pwc.newfind
+package com.pwc.newfind.setting
 
 import android.content.ComponentName
 import android.content.Context
@@ -17,6 +17,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.pwc.newfind.base.Application
+import com.pwc.newfind.R
 import com.pwc.newfind.bean.ActionStartCompanyBean
 import com.pwc.newfind.bean.FavouriteCompanyBean
 import com.pwc.newfind.bean.PostResult
@@ -44,6 +46,7 @@ class FavouriteCompanyActivity : AppCompatActivity() {
         window.statusBarColor = Color.rgb(0xC5, 0x2A, 0x1A)
         setContentView(R.layout.company_favourite_activity)
         setSupportActionBar(toolbar)
+        toolbar.setNavigationOnClickListener { this@FavouriteCompanyActivity.finish() }
         setListView()
         loadDate()
     }

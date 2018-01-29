@@ -11,8 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.pwc.newfind.R
 import com.pwc.newfind.entity.ResearchEntity
-import android.widget.Toast
 import android.content.ActivityNotFoundException
+import android.util.Log
 
 
 /**
@@ -52,9 +52,10 @@ class ResearchAdapter constructor(subList: MutableList<ResearchEntity>) : Recycl
             try {
                 view.context.startActivity(getPdfFileIntent(subDataList[position].attachment!!))
             } catch (e: ActivityNotFoundException) {
-                Toast.makeText(view.context,
-                        "No Application Available to View PDF",
-                        Toast.LENGTH_SHORT).show()
+                val uri = Uri.parse(subDataList[position].attachment)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                view.context.startActivity(intent)
+                Log.e("HLA", "No Application Available to View PDF")
             }
         })
     }

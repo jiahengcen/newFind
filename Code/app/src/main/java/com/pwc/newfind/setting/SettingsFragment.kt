@@ -1,4 +1,4 @@
-package com.pwc.newfind
+package com.pwc.newfind.setting
 
 
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.pwc.newfind.R
 import kotlinx.android.synthetic.main.settings_fragment.*
 
 /**

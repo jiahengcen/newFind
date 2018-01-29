@@ -1,58 +1,60 @@
-package com.pwc.newfind
+package com.pwc.newfind.setting
 
-import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.view.WindowManager
+import android.widget.*
+import com.pwc.newfind.base.Application
+import com.pwc.newfind.home.IndustryAdapter
+import com.pwc.newfind.R
+import com.pwc.newfind.bean.FavouriteIndustryBean
 import com.pwc.newfind.bean.IndustryListBean
-import com.pwc.newfind.net.Constant
 import com.pwc.newfind.net.Helper
 import com.pwc.newfind.net.RetrofitHelper
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.android.synthetic.main.company_favourite_activity.*
 import rx.Observer
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
-
 import rx.schedulers.Schedulers
 import java.util.ArrayList
 
 /**
- * Created by lhuang126 on 1/9/2018.
+ * Created by lhuang126 on 1/23/2018.
  */
-class IndustryPickActivity : AppCompatActivity(), View.OnClickListener, IndustryAdapter.OnSelectListener {
+class FavouriteIndustryActivity : AppCompatActivity(), View.OnClickListener, IndustryAdapter.OnSelectListener {
     private val retrofit by lazy {
-        Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(Constant.host)
-                .build()
+        RetrofitHelper.getInstance(this)
     }
-    val service by lazy { retrofit.create(NetService::class.java) }
-    private val btnNext: LinearLayout by lazy { findViewById<LinearLayout>(R.id.next_layout) }
-    private val tvNext: TextView by lazy { findViewById<TextView>(R.id.next_text) }
+    val service by lazy { retrofit.server }
+
+    private val tvNext: TextView by lazy { findViewById<TextView>(R.id.save) }
     private var industryNet: Subscription? = null
     private val recyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.recyclerView) }
     private val industryAdapter = IndustryAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.industry_pick_activty)
+        //添加Flag把状态栏设为可绘制模式
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        //设置状态栏颜色
+        window.statusBarColor = Color.rgb(0xC5, 0x2A, 0x1A)
+        setContentView(R.layout.industry_favourite_activty)
+        setSupportActionBar(toolbar)
+        toolbar.setNavigationOnClickListener { this@FavouriteIndustryActivity.finish() }
         loadData()
-        btnNext.setOnClickListener(this)
+        tvNext.setOnClickListener(this)
     }
 
     private fun loadData() {
         recyclerView.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false)
         industryAdapter.setHasOneSelectListener(this)
         recyclerView.adapter = industryAdapter
-        recyclerView.adapter.notifyDataSetChanged()
         RetrofitHelper.getInstance(this.applicationContext)
+
         industryNet = service.industryList()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -71,12 +73,27 @@ class IndustryPickActivity : AppCompatActivity(), View.OnClickListener, Industry
                     }
 
                 })
+        service.getStarIndustry(Application.getInstances().userToken)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<FavouriteIndustryBean> {
+                    override fun onCompleted() {
+                        Log.e("HLA", "onCompleted")
+                    }
 
+                    override fun onError(e: Throwable?) {
+                        Log.e("HLA", "onError")
+                    }
 
-//                .subscribe(Action1 { act ->
-//                    Log.e("HLA", "service")
-//                    jobAdapter.reSetData(act.industryList as MutableList<String>)
-//                })
+                    override fun onNext(t: FavouriteIndustryBean) {
+                        var selectDataSet: MutableSet<String> = mutableSetOf()
+                        for (item in t.starIndustryList!!) {
+                            selectDataSet.add(item)
+                        }
+                        industryAdapter.reSetSelectData(selectDataSet)
+                    }
+
+                })
     }
 
     override fun onResume() {
@@ -85,13 +102,11 @@ class IndustryPickActivity : AppCompatActivity(), View.OnClickListener, Industry
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.next_layout -> {
+            R.id.save -> {
                 var date = mutableListOf<String>()
                 industryAdapter.selectDataSet.forEach { date.add(it) }
                 Helper.actionStarIndustry(this, date as ArrayList<String>, "override")
-                val intent: Intent = Intent()
-                intent.setClass(this, CompanyPickActivity::class.java)
-                startActivity(intent)
+                finish()
             }
         }
     }
@@ -115,4 +130,3 @@ class IndustryPickActivity : AppCompatActivity(), View.OnClickListener, Industry
 
     }
 }
-

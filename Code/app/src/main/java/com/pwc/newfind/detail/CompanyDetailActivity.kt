@@ -1,6 +1,5 @@
 package com.pwc.newfind.detail
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,9 +8,8 @@ import android.util.TypedValue
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
-import com.pwc.newfind.Application
+import com.pwc.newfind.base.Application
 import com.pwc.newfind.R
-import com.pwc.newfind.SearchActivity
 import com.pwc.newfind.net.RetrofitHelper
 import com.pwc.newfind.bean.CompanyDetailBean
 import com.pwc.newfind.entity.CompanyDetailEntity

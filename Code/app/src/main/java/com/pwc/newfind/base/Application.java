@@ -1,9 +1,10 @@
-package com.pwc.newfind;
+package com.pwc.newfind.base;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.pwc.newfind.net.StringConverterFactory;
 import com.pwc.newfind.db.DaoMaster;
 import com.pwc.newfind.db.DaoSession;
 import com.pwc.newfind.db.UserDao;

@@ -1,4 +1,4 @@
-package com.pwc.newfind
+package com.pwc.newfind.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import com.pwc.newfind.R
+import com.pwc.newfind.base.Application
 import com.pwc.newfind.detail.CompanyDetailActivity
 import com.pwc.newfind.net.RetrofitHelper
 import com.pwc.searchview.CompanyListAdapter
@@ -40,7 +42,7 @@ class SearchActivity : AppCompatActivity() {
         searchView!!.setOnClickBack { finish() }
         searchView!!.setOnSearchListener { word ->
             Log.e("HLA", "word" + word)
-            sub = RetrofitHelper.getInstance(com.pwc.newfind.Application.appContext)
+            sub = RetrofitHelper.getInstance(Application.appContext)
                     .server
                     .companySearchResult(Application.getInstances().userToken, word!!)
                     .subscribeOn(Schedulers.newThread())

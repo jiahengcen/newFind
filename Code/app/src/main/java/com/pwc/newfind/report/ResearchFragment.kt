@@ -9,7 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.pwc.newfind.Application
+import com.pwc.newfind.base.Application
 import com.pwc.newfind.R
 import com.pwc.newfind.bean.ResearchBean
 import com.pwc.newfind.entity.ResearchEntity
@@ -71,6 +71,7 @@ class ResearchFragment : Fragment() {
                             data.time = item.time
                             data.title = item.title
                             data.attachment = item.attachment
+                            data.starred=item.starred
                             dataList.add(data)
                         }
                         adapter.subDataList = dataList
