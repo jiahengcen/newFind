@@ -1,5 +1,7 @@
 package com.pwc.newfind.entity
 
+import com.pwc.newfind.bean.CompanyDetailBean
+
 /**
  * Created by lhuang126 on 1/14/2018.
  */
@@ -42,6 +44,7 @@ class CompanyDetailEntity {
     var members: MutableList<Member> = mutableListOf()
     var compare: MutableList<CompareCompany> = mutableListOf()
     var alexa: Alexa? = null
+    var product: MutableList<Product> = mutableListOf()
 
     class Funding constructor(funding: String?, investment: String?, investors: MutableList<String>?, round: String?) {
 
@@ -91,12 +94,27 @@ class CompanyDetailEntity {
 
     class Alexa {
         var site: String? = null
-        var x: ArrayList<Int>? = null
+        var x: ArrayList<Int> = arrayListOf()
         var y: MutableList<Y> = mutableListOf()
     }
 
     class Y {
         var rank: ArrayList<Int>? = null
         var scope: String? = null
+    }
+
+    class Product {
+        //"android":"http://android.myapp.com/myapp/detail.htm?apkName=com.woaika.kashen",
+        var android: String? = null
+        //"desc":"信用卡管理借贷平台。",
+        var desc: String? = null
+        //"ios":"https://itunes.apple.com/cn/app/id783533977",
+        var ios: String? = null
+        //"name":"我爱卡",
+        var name: String? = null
+        //"url":"http://www.51credit.com",
+        var url: String? = null
+        //"weixin":""
+        var weixin: String? = null
     }
 }

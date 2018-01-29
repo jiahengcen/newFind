@@ -3,8 +3,14 @@ package com.pwc.newfind.detail
 import android.content.Context
 import android.graphics.Color
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -25,47 +31,92 @@ import java.util.ArrayList
 class CompanyAlexaView(context: Context) : FrameLayout(context) {
     private var lineName: String? = null
     private var lineName1: String? = null
+    private var productListView: ViewGroup? = null
 
     init {
         addView(LayoutInflater.from(context).inflate(R.layout.company_alexa_card_view, this, false))
+        productListView = findViewById(R.id.product_list)
         initDataStyle(context, chart)
     }
 
     fun setData(entity: CompanyDetailEntity) {
-        try {
-            val x = entity.alexa!!.x
-            val YList = entity.alexa!!.y
-            var cnY: MutableList<Int>? = null
-            //  var allY: MutableList<Int>? = null
-            if (YList.isNotEmpty()) {
-                for (i in YList.indices) {
-                    if ("中国" == YList[i].scope) {
-                        cnY = YList[i].rank
-                    } else if ("全球" == YList[i].scope) {
-                        //            allY = YList[i].rank
+        setMainProduct(entity, productListView)
+        if (entity.alexa == null || entity.alexa!!.x.size == 0) {
+            chart.visibility = View.GONE
+        } else {
+            try {
+                val x = entity.alexa!!.x
+                val YList = entity.alexa!!.y
+                var cnY: MutableList<Int>? = null
+                //  var allY: MutableList<Int>? = null
+                if (YList.isNotEmpty()) {
+                    for (i in YList.indices) {
+                        if ("中国" == YList[i].scope) {
+                            cnY = YList[i].rank
+                        } else if ("全球" == YList[i].scope) {
+                            //            allY = YList[i].rank
+                        }
                     }
                 }
+                val cnValue = mutableListOf<Entry>()
+                //   val allValue = mutableListOf<Entry>()
+                for (i in x!!.indices) {
+
+                    cnValue.add(Entry(TimeUtil.differentDays(x[0].toString(), x[i].toString()).toFloat(), cnY!![i].toFloat()))
+                    //      allValue.add(Entry(TimeUtil.differentDays(x[0].toString(), x[i].toString()).toFloat(), allY!![i].toFloat()))
+                }
+                Log.e("HLA", "" + x.size)
+                //设置描述信息
+                chart.description.text = ""
+
+                //设置X轴显示内容
+                val xAxis = chart.xAxis
+
+                xAxis.valueFormatter = TimeAxisValueFormatter(x[0].toString())
+                initSingleLineChart(context, chart, cnValue as ArrayList<Entry>)
+            } catch (e: ParseException) {
+                Log.e("HLA", e.message)
             }
-            val cnValue = mutableListOf<Entry>()
-            //   val allValue = mutableListOf<Entry>()
-            for (i in x!!.indices) {
-
-                cnValue.add(Entry(TimeUtil.differentDays(x[0].toString(), x[i].toString()).toFloat(), cnY!![i].toFloat()))
-                //      allValue.add(Entry(TimeUtil.differentDays(x[0].toString(), x[i].toString()).toFloat(), allY!![i].toFloat()))
-            }
-            Log.e("HLA", "" + x.size)
-            //设置描述信息
-            chart.description.text = ""
-
-            //设置X轴显示内容
-            val xAxis = chart.xAxis
-
-            xAxis.valueFormatter = TimeAxisValueFormatter(x[0].toString())
-            initSingleLineChart(context, chart, cnValue as ArrayList<Entry>)
-        } catch (e: ParseException) {
-            Log.e("HLA", e.message)
         }
 
+
+    }
+
+    private fun setMainProduct(entity: CompanyDetailEntity, productListView: ViewGroup?) {
+
+        for (item in entity.product) {
+            val view = LayoutInflater.from(context).inflate(R.layout.company_alexa_card_view_content, this, false)
+            view.findViewById<TextView>(R.id.fullCompanyName).text = item.name
+            view.findViewById<TextView>(R.id.description).text = item.desc
+            val listProduct = view.findViewById<LinearLayout>(R.id.product_content_list)
+
+            if (item.ios != null && item.ios!!.length > 3) {
+                val image = getImageView()
+                image.setImageResource(R.drawable.ic_ios)
+                listProduct.addView(image)
+            }
+            if (item.android != null && item.android!!.length > 3) {
+                val image = getImageView()
+                image.setImageResource(R.drawable.ic_android)
+                listProduct.addView(image)
+            }
+            productListView!!.addView(view)
+
+        }
+
+    }
+
+    private fun getImageView(): ImageView {
+        val image = ImageView(context)
+        image.scaleType = ImageView.ScaleType.CENTER_INSIDE
+        val params = LinearLayout.LayoutParams(dp2px(24), dp2px(24))
+        image.layoutParams = params
+        return image
+    }
+
+    private fun dp2px(dp: Int): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
+                resources.displayMetrics).toInt()
     }
 
     /**

@@ -9,6 +9,7 @@ class CompanyDetailBean {
     var info: Information? = null
     var member: ArrayList<Member>? = null
     var alexa: Alexa? = null
+    val product: ArrayList<Product>? = null
 
     class Alexa {
         var site: String? = null
@@ -97,5 +98,20 @@ class CompanyDetailBean {
         //"work": ""
         var work: String? = null
 
+    }
+
+    class Product {
+        //"android":"http://android.myapp.com/myapp/detail.htm?apkName=com.woaika.kashen",
+        val android: String? = null
+        //"desc":"信用卡管理借贷平台。",
+        val desc: String? = null
+        //"ios":"https://itunes.apple.com/cn/app/id783533977",
+        val ios: String? = null
+        //"name":"我爱卡",
+        val name: String? = null
+        //"url":"http://www.51credit.com",
+        val url: String? = null
+        //"weixin":""
+        val weixin: String? = null
     }
 }
