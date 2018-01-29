@@ -52,8 +52,14 @@ interface RetrofitService {
     fun getStarIndustry(
             @Header("Authorization") authorization: String
     ): Observable<FavouriteIndustryBean>
+
     @GET(Constant.subscription)
     fun getNews(
             @Header("Authorization") authorization: String
     ): Observable<NewsBean>
+
+    @GET(Constant.research)
+    fun getReport(
+            @Header("Authorization") authorization: String
+    ): Observable<ResearchBean>
 }

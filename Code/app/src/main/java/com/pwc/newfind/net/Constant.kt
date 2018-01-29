@@ -42,5 +42,13 @@ object Constant {
      */
     const val subscription="user/news"
     const val actionStarIndustry="user/starIndustry"
+    /**
+     * 获得研报
+     */
+    const val research="research/get"
+    /**
+     * 关注或取消关注研报
+     */
+    const val actionStarResearch="user/starResearch"
 }
 
