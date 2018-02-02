@@ -11,6 +11,7 @@ import android.view.MenuItem
 import com.pwc.newfind.R
 import com.pwc.newfind.setting.SettingsFragment
 import com.pwc.newfind.finding.FindingFragment
+import com.pwc.newfind.finding.NewFindingFragment
 import com.pwc.newfind.report.ResearchFragment
 import com.pwc.newfind.subscription.SubscriptionFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -79,7 +80,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_finding -> {
                 val ft = supportFragmentManager.beginTransaction()
-                ft.replace(R.id.content_view, FindingFragment(), "finding");
+                ft.replace(R.id.content_view, NewFindingFragment(), "finding");
                 ft.commitAllowingStateLoss()
                 toolbar.title = "发现"
             }

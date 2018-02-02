@@ -73,12 +73,6 @@ class IndustryPickActivity : AppCompatActivity(), View.OnClickListener, Industry
                     }
 
                 })
-
-
-//                .subscribe(Action1 { act ->
-//                    Log.e("HLA", "service")
-//                    jobAdapter.reSetData(act.industryList as MutableList<String>)
-//                })
     }
 
     override fun onResume() {

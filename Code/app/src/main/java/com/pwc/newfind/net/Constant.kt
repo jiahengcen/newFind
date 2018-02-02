@@ -28,27 +28,39 @@ object Constant {
      */
     const val detailCompany = "company/detail"
 
-    const val getToken="user/get_token"
+    const val getToken = "user/get_token"
     /**
      * 操作关注的公司
      */
-    const val actionStarCompany="user/starCompany"
+    const val actionStarCompany = "user/starCompany"
     /**
      * 获取关注的公司
      */
-    const val getStarCompany="user/starCompany"
+    const val getStarCompany = "user/starCompany"
     /**
      * 获取新闻列表
      */
-    const val subscription="user/news"
-    const val actionStarIndustry="user/starIndustry"
+    const val subscription = "user/news"
+    const val actionStarIndustry = "user/starIndustry"
     /**
      * 获得研报
      */
-    const val research="research/get"
+    const val research = "research/get"
     /**
      * 关注或取消关注研报
      */
-    const val actionStarResearch="user/starResearch"
+    const val actionStarResearch = "user/starResearch"
+    /**
+     * 获取列表
+     */
+    const val getFindingList = "discover/filterList"
+    /**
+     *     /discover/get?filter=xxx
+     */
+    const val getFindingCompany = "discover/get"
+    /**
+     *     /discover/get
+     */
+    const val getFindingCompanyDefault = "discover/get"
 }
 

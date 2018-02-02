@@ -62,9 +62,26 @@ interface RetrofitService {
     fun getReport(
             @Header("Authorization") authorization: String
     ): Observable<ResearchBean>
+
     @POST(Constant.actionStarResearch)
     fun actionStarResearch(
             @Header("Authorization") authorization: String,
             @Body action: ActionStartIndustryBean
     ): Observable<PostResult>
+
+    @GET(Constant.getFindingList)
+    fun getFindingTitleList(
+            @Header("Authorization") authorization: String
+    ): Observable<FindingTitleBean>
+
+    @GET(Constant.getFindingCompany)
+    fun getFindingTitles(
+            @Header("Authorization") authorization: String,
+            @Query("filter") filter: String
+    ): Observable<FindingCompanyBean>
+
+    @GET(Constant.getFindingCompanyDefault)
+    fun getFindingTitlesDefault(
+            @Header("Authorization") authorization: String
+    ): Observable<FindingCompanyBean>
 }
