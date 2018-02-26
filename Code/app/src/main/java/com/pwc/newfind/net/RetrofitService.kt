@@ -66,7 +66,7 @@ interface RetrofitService {
     @POST(Constant.actionStarResearch)
     fun actionStarResearch(
             @Header("Authorization") authorization: String,
-            @Body action: ActionStartIndustryBean
+            @Body action: ActionStartReportBean
     ): Observable<PostResult>
 
     @GET(Constant.getFindingList)

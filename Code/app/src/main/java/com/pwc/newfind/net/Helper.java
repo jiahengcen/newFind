@@ -6,6 +6,7 @@ import android.util.Log;
 import com.pwc.newfind.base.Application;
 import com.pwc.newfind.bean.ActionStartCompanyBean;
 import com.pwc.newfind.bean.ActionStartIndustryBean;
+import com.pwc.newfind.bean.ActionStartReportBean;
 import com.pwc.newfind.bean.PostResult;
 
 import java.util.ArrayList;
@@ -20,7 +21,32 @@ import rx.schedulers.Schedulers;
  */
 
 public class Helper {
+    public static final String ACTION_TYPE_INSERT="insert";
+    public static final String ACTION_TYPE_DELETE="delete";
+    public static final String ACTION_TYPE_OVERRIDE="override";
+    public static void actionStartReport(Context context,String fullName,String actionType){
+        ArrayList<String> fullNames = new ArrayList<>();
+        fullNames.add(fullName);
+        actionStartReport(context, fullNames, actionType);
+    }
+    private static void actionStartReport(Context context, ArrayList<String> fullNames, String actionType) {
+        ActionStartReportBean actionStartReportBean = new ActionStartReportBean();
+        actionStartReportBean.setActionType(actionType);
+        actionStartReportBean.setId(fullNames);
+        try {
+            RetrofitHelper.Companion.getInstance(context).getServer().actionStarResearch(Application.getInstances().getUserToken(), actionStartReportBean)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<PostResult>() {
+                        @Override
+                        public void call(PostResult postResult) {
 
+                        }
+                    });
+        } catch (Exception e) {
+            Log.e("HLA", "actionStarCompany error, e:" + e.getMessage());
+        }
+    }
     public static void actionStarCompany(Context context, String fullName, String actionType) {
         ArrayList<String> fullNames = new ArrayList<>();
         fullNames.add(fullName);

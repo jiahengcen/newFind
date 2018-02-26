@@ -13,7 +13,7 @@ import com.pwc.newfind.R
 import com.pwc.newfind.entity.ResearchEntity
 import android.content.ActivityNotFoundException
 import android.util.Log
-
+import com.pwc.newfind.net.Helper
 
 /**
  * Created by lhuang126 on 1/10/2018.
@@ -37,14 +37,15 @@ class ResearchAdapter constructor(subList: MutableList<ResearchEntity>) : Recycl
             holder.favourite.tag = "unSelect"
         }
         holder.source.text = subDataList[position].source
+        holder.id = subDataList[position].id
         holder.favourite.setOnClickListener({ view ->
             if (holder.favourite.tag == "select") {
-                // RetrofitHelper.getInstance(view.context).server.actionStarCompany()
-
+                Helper.actionStartReport(view.context, holder.id, Helper.ACTION_TYPE_DELETE)
                 holder.favourite.setImageResource(R.drawable.ic_grade_unselect)
                 holder.favourite.tag = "unSelect"
             } else {
                 holder.favourite.setImageResource(R.drawable.ic_grade)
+                Helper.actionStartReport(view.context, holder.id, Helper.ACTION_TYPE_INSERT)
                 holder.favourite.tag = "select"
             }
         })
@@ -88,6 +89,7 @@ class ResearchAdapter constructor(subList: MutableList<ResearchEntity>) : Recycl
     }
 
     class ResearchViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        var id: String? = null
         val title: TextView = itemView!!.findViewById(R.id.title)
         val favourite: ImageView = itemView!!.findViewById(R.id.favourite)
         val pdf: ImageView = itemView!!.findViewById(R.id.pdf)
