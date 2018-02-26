@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.pwc.newfind.R
 import com.pwc.newfind.entity.CompanyDetailEntity
+import com.pwc.newfind.net.Helper
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.company_margin_card_view.view.*
 
@@ -43,8 +44,12 @@ class CompanyCompareView(context: Context) : FrameLayout(context) {
                     override fun onClick(v: View?) {
                         if (button.tag == "true") {
                             button.tag = "false"
+                            button.text = "关注"
+                            Helper.actionStarCompany(context, entity.fullName, "delete")
                         } else {
                             button.tag = "true"
+                            button.text = "已关注"
+                            Helper.actionStarCompany(context, entity.fullName, "insert")
                         }
                     }
                 })

@@ -30,8 +30,9 @@ import java.util.ArrayList
  * Created by lhuang126 on 1/19/2018.
  */
 class NewFindingFragment : Fragment() {
-    private var userId by Preference("UserId", "csdn41526")
-    lateinit var viewGroup: ViewGroup
+    private var findingTitle by Preference("FindingTitle", "")
+    private var findingFilter by Preference("FindingFilter", "")
+    private lateinit var viewGroup: ViewGroup
     private val titleView by lazy {
         viewGroup.findViewById<TextView>(R.id.title)
     }
@@ -58,41 +59,41 @@ class NewFindingFragment : Fragment() {
     private val listMap: MutableList<Map<String, Any>> = mutableListOf() //定义一个适配器对象
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         viewGroup = inflater.inflate(R.layout.new_finding_fragment_layout, container, false) as ViewGroup
-        //  val titleString:String=get
-
-
-        userId = " test123 " //自动调用SharedPreferences的putString("UserId"," test123 ")
-
-        var otherUserId = userId // 自动调用 getString("UserId","csdn41526")
-
-        loadCompanyListDefault()
+        if (findingFilter.length > 2) {
+            loadCompanyList(findingFilter, findingTitle, false)
+        } else {
+            loadCompanyListDefault()
+        }
         titleLayout.setOnClickListener({
 
             val animator = ObjectAnimator.ofFloat(listTitleLayout, "translationY", (listTitleLayout.measuredHeight).toFloat(), 0F)
             animator.duration = 1000
             animator.start()
-            sampleAdapter = SimpleAdapter(activity, listMap, android.R.layout.simple_list_item_1, arrayOf("title"), intArrayOf(android.R.id.text1))
+            sampleAdapter = SimpleAdapter(activity, listMap, R.layout.simple_list_item, arrayOf("title"), intArrayOf(android.R.id.text1))
             listTitle.setOnItemClickListener { _, _, _, id ->
-                loadCompanyList(titleListEntity.tileList[id.toInt()].filter!!, titleListEntity.tileList[id.toInt()].title!!)
+                loadCompanyList(titleListEntity.tileList[id.toInt()].filter!!, titleListEntity.tileList[id.toInt()].title!!, true)
             }
             loadTitleList()
             listTitle.adapter = sampleAdapter
-            //listTitle.visibility = View.VISIBLE
-            listContent.visibility = View.GONE
+            listContent.visibility = View.INVISIBLE
             listTitleLayout.visibility = View.VISIBLE
         })
         Handler().postDelayed({ progressBar.visibility = View.GONE }, 5000)
         return viewGroup
     }
 
-    private fun loadCompanyList(filter: String, title: String) {
-        val animator = ObjectAnimator.ofFloat(listTitleLayout, "translationY", 0F, (listTitleLayout.measuredHeight).toFloat())
-        animator.duration = 1000
-        animator.start()
-        listContent.adapter=companyAdapter
-        //listTitle.visibility = View.GONE
-        listContent.visibility = View.VISIBLE
-        //listTitleLayout.visibility = View.GONE
+    private fun loadCompanyList(filter: String, title: String, needAnimator: Boolean) {
+        findingTitle = title
+        findingFilter = filter
+        if (needAnimator) {
+            val animator = ObjectAnimator.ofFloat(listTitleLayout, "translationY", 0F, (listTitleLayout.measuredHeight).toFloat())
+            animator.duration = 1000
+            animator.start()
+        } else {
+            listTitleLayout.visibility = View.INVISIBLE
+        }
+        listContent.adapter = companyAdapter
+
         titleView.text = title
         RetrofitHelper.getInstance(activity)
                 .server
@@ -131,7 +132,7 @@ class NewFindingFragment : Fragment() {
         val animator = ObjectAnimator.ofFloat(listTitleLayout, "translationY", 0F, (listTitleLayout.measuredHeight).toFloat())
         animator.duration = 1000
         animator.start()
-        listContent.adapter=companyAdapter
+        listContent.adapter = companyAdapter
         //listTitle.visibility = View.GONE
         listContent.visibility = View.VISIBLE
         //listTitleLayout.visibility = View.GONE
@@ -168,21 +169,21 @@ class NewFindingFragment : Fragment() {
                 })
     }
 
-    private fun loadData(title: String) {
-
-
-        val animator = ObjectAnimator.ofFloat(listTitleLayout, "translationY", 0F, (listTitleLayout.measuredHeight).toFloat())
-        animator.duration = 1000
-        animator.start()
-        val arrayAdapter = ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, Test.getCompanyList())
-        listContent.setOnItemClickListener { _, _, _, id ->
-            //loadData(titleListEntity.tileList[id.toInt()])
-        }
-        listContent.adapter = arrayAdapter
-        //listTitle.visibility = View.GONE
-        listContent.visibility = View.VISIBLE
-        //listTitleLayout.visibility = View.GONE
-    }
+//    private fun loadData(title: String) {
+//
+//
+//        val animator = ObjectAnimator.ofFloat(listTitleLayout, "translationY", 0F, (listTitleLayout.measuredHeight).toFloat())
+//        animator.duration = 1000
+//        animator.start()
+//        val arrayAdapter = ArrayAdapter<String>(activity, R.layout.simple_list_item, Test.getCompanyList())
+//        listContent.setOnItemClickListener { _, _, _, id ->
+//            //loadData(titleListEntity.tileList[id.toInt()])
+//        }
+//        listContent.adapter = arrayAdapter
+//        //listTitle.visibility = View.GONE
+//        listContent.visibility = View.VISIBLE
+//        //listTitleLayout.visibility = View.GONE
+//    }
 
     private fun loadTitleList() {
         RetrofitHelper.getInstance(activity)
@@ -208,8 +209,9 @@ class NewFindingFragment : Fragment() {
                             val hashMap = HashMap<String, Any>()
                             hashMap.put("title", item.title!!)
                             listMap.add(hashMap)
-                            sampleAdapter.notifyDataSetChanged()
+
                         }
+                        sampleAdapter.notifyDataSetChanged()
                     }
 
                 })

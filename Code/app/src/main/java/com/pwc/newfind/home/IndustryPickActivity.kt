@@ -15,6 +15,7 @@ import com.pwc.newfind.bean.IndustryListBean
 import com.pwc.newfind.net.Constant
 import com.pwc.newfind.net.Helper
 import com.pwc.newfind.net.RetrofitHelper
+import com.pwc.newfind.util.Preference
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -36,6 +37,7 @@ class IndustryPickActivity : AppCompatActivity(), View.OnClickListener, Industry
                 .baseUrl(Constant.host)
                 .build()
     }
+    private var firstRun by Preference("AppFirstRun", true)
     val service by lazy { retrofit.create(NetService::class.java) }
     private val btnNext: LinearLayout by lazy { findViewById<LinearLayout>(R.id.next_layout) }
     private val tvNext: TextView by lazy { findViewById<TextView>(R.id.next_text) }
@@ -45,8 +47,15 @@ class IndustryPickActivity : AppCompatActivity(), View.OnClickListener, Industry
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.industry_pick_activty)
-        loadData()
-        btnNext.setOnClickListener(this)
+        if (firstRun) {
+            loadData()
+            btnNext.setOnClickListener(this)
+        } else {
+            val intent = Intent()
+            intent.setClass(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun loadData() {
@@ -75,19 +84,18 @@ class IndustryPickActivity : AppCompatActivity(), View.OnClickListener, Industry
                 })
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.next_layout -> {
                 var date = mutableListOf<String>()
                 industryAdapter.selectDataSet.forEach { date.add(it) }
                 Helper.actionStarIndustry(this, date as ArrayList<String>, "override")
-                val intent: Intent = Intent()
-                intent.setClass(this, CompanyPickActivity::class.java)
+                val intent = Intent()
+                //intent.setClass(this, CompanyPickActivity::class.java)
+                intent.setClass(this, MainActivity::class.java)
+                firstRun = false
                 startActivity(intent)
+                finish()
             }
         }
     }

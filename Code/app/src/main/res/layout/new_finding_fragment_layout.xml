@@ -8,19 +8,20 @@
     <LinearLayout
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:orientation="horizontal">
 
         <TextView
-
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
-            android:textSize="16dp"
-            android:text="请选择类型" />
+            android:text="请选择类型"
+            android:textSize="18sp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -29,11 +30,17 @@
             android:src="@drawable/ic_chevron_right" />
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/loading_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
     <android.support.v7.widget.CardView
         android:id="@+id/list_title_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/title_layout">
+        android:layout_height="match_parent">
 
         <ListView
             android:id="@+id/list_title"
@@ -47,12 +54,8 @@
         android:id="@+id/list_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title_layout" />
-    <ProgressBar
-        android:id="@+id/loading_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_below="@id/title_layout"
+        android:paddingTop="16dp" />
+
 
 </RelativeLayout>
