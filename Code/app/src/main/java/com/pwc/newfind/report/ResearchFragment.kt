@@ -1,6 +1,7 @@
 package com.pwc.newfind.report
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -21,7 +22,7 @@ import rx.schedulers.Schedulers
 /**
  * Created by lhuang126 on 1/19/2018.
  */
-class ResearchFragment : Fragment() {
+class ResearchFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -29,6 +30,7 @@ class ResearchFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(container!!.context)
         adapter.context = activity
         recycler.adapter = adapter
+        swipeRefreshLayout.setOnRefreshListener(this)
         return viewContent
 
     }
@@ -49,6 +51,11 @@ class ResearchFragment : Fragment() {
         load()
     }
 
+    override fun onRefresh() {
+        Handler().postDelayed({
+            swipeRefreshLayout.isRefreshing = false
+        }, 1200);
+    }
 
     private fun load() {
         RetrofitHelper.getInstance(activity)
@@ -71,7 +78,7 @@ class ResearchFragment : Fragment() {
                             data.time = item.time
                             data.title = item.title
                             data.attachment = item.attachment
-                            data.starred=item.starred
+                            data.starred = item.starred
                             dataList.add(data)
                         }
                         adapter.subDataList = dataList

@@ -2,6 +2,7 @@ package com.pwc.newfind.subscription
 
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.pwc.newfind.base.Application
 import com.pwc.newfind.bean.NewsBean
 import com.pwc.newfind.bean.SubscriptionBean
 import com.pwc.newfind.net.RetrofitHelper
+import com.pwc.newfind.view.MyDecoration
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -23,9 +25,11 @@ import rx.schedulers.Schedulers
 /**
  * Created by lhuang126 on 1/10/2018.
  */
-class SubscriptionFragment : Fragment() {
+class SubscriptionFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+
+
     private lateinit var viewContent: ViewGroup
-    val swipeRefreshLayout: SwipeRefreshLayout by lazy {
+    private val swipeRefreshLayout: SwipeRefreshLayout by lazy {
         viewContent.findViewById<SwipeRefreshLayout>(R.id.main_srl)
     }
     val recycler: RecyclerView by lazy {
@@ -46,8 +50,17 @@ class SubscriptionFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(container!!.context)
         adapter.context = activity
         recycler.adapter = adapter
+        recycler.addItemDecoration(MyDecoration(activity, LinearLayoutManager.VERTICAL))
+        swipeRefreshLayout.setOnRefreshListener(this)
         return viewContent
     }
+
+    override fun onRefresh() {
+        Handler().postDelayed({
+            swipeRefreshLayout.isRefreshing = false
+        }, 1200);
+    }
+
 
     private fun load() {
         RetrofitHelper.getInstance(activity)
@@ -68,7 +81,7 @@ class SubscriptionFragment : Fragment() {
                             data.content = item.title
                             data.time = item.publish_date
                             data.iconUrl = item.logo
-                            data.webSite=item.url
+                            data.webSite = item.url
                             dataList.add(data)
                         }
                         adapter.subDataList = dataList
