@@ -84,4 +84,21 @@ interface RetrofitService {
     fun getFindingTitlesDefault(
             @Header("Authorization") authorization: String
     ): Observable<FindingCompanyBean>
+
+    /**
+     * 返回authorization
+     */
+    @POST(Constant.login)
+    fun login(
+            @Body action: ActionLoginBodyBean
+    ): Observable<LoginPostResult>
+
+    /**
+     * 注册成功时会生成新的authorization
+     * 返回注册结果，成功，失败
+     */
+    @POST(Constant.register)
+    fun register(
+            @Body action: ActionRegisterBodyBean
+    ): Observable<RegisterPostResult>
 }

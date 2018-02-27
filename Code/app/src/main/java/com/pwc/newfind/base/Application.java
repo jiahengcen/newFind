@@ -102,8 +102,16 @@ public class Application extends android.app.Application {
         return db;
     }
 
-    public String getUserToken() {
+    public void setUserToken(String mUserToken) {
+        this.mUserToken = mUserToken;
+        User user = new User();
+        user.setId(1L);
+        user.setAge(0);
+        user.setToken(mUserToken);
+        getDaoSession().getUserDao().insertOrReplace(user);
+    }
 
+    public String getUserToken() {
         return mUserToken;
     }
 

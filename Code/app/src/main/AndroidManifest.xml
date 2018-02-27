@@ -32,6 +32,20 @@
 
         </activity>
         <activity
+            android:name=".home.LoginActivity"
+            android:label="登录"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".home.RegisterActivity"
+            android:label="注册"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
             android:name=".home.MainActivity"
             android:label="关注"
             android:screenOrientation="portrait"

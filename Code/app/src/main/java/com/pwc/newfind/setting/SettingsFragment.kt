@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pwc.newfind.R
+import com.pwc.newfind.home.LoginActivity
 import kotlinx.android.synthetic.main.settings_fragment.*
 
 /**
@@ -22,10 +23,13 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         company.setOnClickListener(this)
         industry.setOnClickListener(this)
+        user.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
+            R.id.user ->
+                startActivity(Intent(activity, LoginActivity::class.java))
             R.id.company ->
                 startActivity(Intent(activity, FavouriteCompanyActivity::class.java))
             R.id.industry ->

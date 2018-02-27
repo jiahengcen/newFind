@@ -2,27 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/lightgrey">
+    android:background="@color/lightgrey"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/ic_account_circle" />
+
+        <TextView
+            android:id="@+id/account_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"
+            android:text="未设定昵称"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:orientation="horizontal"
         android:background="@color/white"
-        android:paddingTop="16dp"
+        android:orientation="horizontal"
         android:paddingBottom="16dp"
-        >
+        android:paddingTop="16dp">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_near_me"
-            />
+            android:src="@drawable/ic_near_me" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,32 +58,31 @@
             android:layout_marginLeft="16dp"
             android:gravity="center"
             android:text="关注公司"
-            android:textSize="16dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="16dp" />
     </LinearLayout>
 
     <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="2dp"-->
-        <!--android:background="#F1F1F1" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="2dp"-->
+    <!--android:background="#F1F1F1" />-->
 
     <LinearLayout
         android:id="@+id/industry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:orientation="horizontal"
         android:background="@color/white"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_work"
-            />
+            android:src="@drawable/ic_work" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,31 +91,30 @@
             android:layout_marginLeft="16dp"
             android:gravity="center"
             android:text="关注行业"
-            android:textSize="16dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="16dp" />
     </LinearLayout>
 
     <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="3dp"-->
-        <!--android:background="#F1F1F1" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="3dp"-->
+    <!--android:background="#F1F1F1" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:orientation="horizontal"
         android:background="@color/white"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_search_im"
-            />
+            android:src="@drawable/ic_search_im" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,31 +123,30 @@
             android:layout_marginLeft="16dp"
             android:gravity="center"
             android:text="我的关键字"
-            android:textSize="16dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="16dp" />
     </LinearLayout>
 
     <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="3dp"-->
-        <!--android:background="#F1F1F1" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="3dp"-->
+    <!--android:background="#F1F1F1" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:orientation="horizontal"
         android:background="@color/white"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_grade"
-            />
+            android:src="@drawable/ic_grade" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -131,11 +155,11 @@
             android:layout_marginLeft="16dp"
             android:gravity="center"
             android:text="我的收藏"
-            android:textSize="16dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="16dp" />
     </LinearLayout>
     <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="2dp"-->
-        <!--android:background="#F1F1F1" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="2dp"-->
+    <!--android:background="#F1F1F1" />-->
 </LinearLayout>
