@@ -54,6 +54,7 @@ class IndustryPickActivity : AppCompatActivity(), View.OnClickListener, Industry
             val intent = Intent()
             intent.setClass(this, MainActivity::class.java)
             startActivity(intent)
+            this.finish()
         }
 
     }
@@ -113,7 +114,7 @@ class IndustryPickActivity : AppCompatActivity(), View.OnClickListener, Industry
 
     override fun onDestroy() {
         super.onDestroy()
-        if (industryNet!!.isUnsubscribed) {
+        if (industryNet!=null&&industryNet!!.isUnsubscribed) {
             industryNet!!.unsubscribe()
         }
 
