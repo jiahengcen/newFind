@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.pwc.newfind.R
 import com.pwc.newfind.base.Application
+import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.bean.ActionLoginBodyBean
 import com.pwc.newfind.bean.LoginPostResult
 import com.pwc.newfind.net.RetrofitHelper
@@ -67,6 +68,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     override fun onNext(t: LoginPostResult) {
                         if (t.msgId != null && t.msgId == 0) {
                             Application.getInstances().userToken = t.authorization
+                            UserHelper.setUserPhone(t.phone)
                         } else {
                             Toast.makeText(this@LoginActivity, "登录失败，用户名或密码错误", Toast.LENGTH_SHORT).show()
                         }

@@ -3,11 +3,13 @@ package com.pwc.newfind.setting
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.UserHandle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pwc.newfind.R
+import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.home.LoginActivity
 import kotlinx.android.synthetic.main.settings_fragment.*
 
@@ -26,10 +28,24 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         user.setOnClickListener(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        val email = UserHelper.getUserEmail()
+        if (email.length < 2) {
+            account_name.text = "未设置昵称"
+        } else {
+            account_name.text = email
+        }
+    }
+
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.user ->
-                startActivity(Intent(activity, LoginActivity::class.java))
+                if (UserHelper.getUserEmail().length < 2) {
+                    startActivity(Intent(activity, LoginActivity::class.java))
+                } else {
+                    startActivity(Intent(activity, LoginActivity::class.java))
+                }
             R.id.company ->
                 startActivity(Intent(activity, FavouriteCompanyActivity::class.java))
             R.id.industry ->

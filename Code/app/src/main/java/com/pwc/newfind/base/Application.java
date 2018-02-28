@@ -41,6 +41,10 @@ public class Application extends android.app.Application {
         getUserTokenNet();
     }
 
+    public void getTempUserToken() {
+        getUserTokenNet();
+    }
+
     private void getUserTokenNet() {
         if (mUserToken == null) {
             List<User> user = getDaoSession().getUserDao().queryBuilder().where(UserDao.Properties.Id.eq(1)).list();

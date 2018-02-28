@@ -46,6 +46,13 @@
 
         </activity>
         <activity
+            android:name=".home.AccountDetailActivity"
+            android:label="用户详情"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
             android:name=".home.MainActivity"
             android:label="关注"
             android:screenOrientation="portrait"

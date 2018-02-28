@@ -16,7 +16,9 @@
     <string name="test_subscription_content">出让10%的股份给一汽，膜拜还能做共享汽车</string>
     <string name="save">保存</string>
     <string name="email">邮箱</string>
+    <string name="email2">邮箱:</string>
     <string name="password">密码</string>
     <string name="confirm_password">确认密码</string>
     <string name="phone">手机号</string>
+    <string name="phone2">手机:</string>
 </resources>
