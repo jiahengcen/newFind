@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.pwc.newfind.R
 import com.pwc.newfind.base.UserHelper
+import com.pwc.newfind.home.AccountDetailActivity
 import com.pwc.newfind.home.LoginActivity
 import kotlinx.android.synthetic.main.settings_fragment.*
 
@@ -44,7 +45,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                 if (UserHelper.getUserEmail().length < 2) {
                     startActivity(Intent(activity, LoginActivity::class.java))
                 } else {
-                    startActivity(Intent(activity, LoginActivity::class.java))
+                    startActivity(Intent(activity, AccountDetailActivity::class.java))
                 }
             R.id.company ->
                 startActivity(Intent(activity, FavouriteCompanyActivity::class.java))

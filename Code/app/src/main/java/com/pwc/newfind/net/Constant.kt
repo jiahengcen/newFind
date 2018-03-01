@@ -62,7 +62,13 @@ object Constant {
      *     /discover/get
      */
     const val getFindingCompanyDefault = "discover/get"
-    const val login=""
-    const val register=""
+    /**
+     * 登录
+     */
+    const val login="user/login"
+    /**
+     * 注册
+     */
+    const val register="user/info"
 }
 

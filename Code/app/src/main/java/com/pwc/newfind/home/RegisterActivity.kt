@@ -7,6 +7,8 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import com.pwc.newfind.R
+import com.pwc.newfind.base.Application
+import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.bean.ActionRegisterBodyBean
 import com.pwc.newfind.bean.RegisterPostResult
 import com.pwc.newfind.net.RetrofitHelper
@@ -59,7 +61,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             actionBean.phone = phone
             RetrofitHelper.getInstance(this)
                     .server
-                    .register(actionBean)
+                    .register(UserHelper.getUserToken(),actionBean)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : Observer<RegisterPostResult> {
@@ -70,6 +72,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                         override fun onNext(t: RegisterPostResult) {
                             if (t.msgId != null && t.msgId == 0) {
                                 Toast.makeText(this@RegisterActivity, "注册成功", Toast.LENGTH_SHORT).show()
+                                val email = register_email.text.toString()
+                                val phone = register_phone.text.toString()
+                                UserHelper.setUserEmail(email)
+                                UserHelper.setUserPhone(phone)
                                 this@RegisterActivity.finish()
                             } else {
                                 Toast.makeText(this@RegisterActivity, "注册失败", Toast.LENGTH_SHORT).show()

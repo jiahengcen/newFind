@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.pwc.newfind.R
 import com.pwc.newfind.base.Application
+import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.bean.ResearchBean
 import com.pwc.newfind.entity.ResearchEntity
 import com.pwc.newfind.net.RetrofitHelper
@@ -44,7 +45,7 @@ class FavouriteReportActivity : AppCompatActivity() {
     private fun load() {
         RetrofitHelper.getInstance(this)
                 .server
-                .getReport(Application.getInstances().userToken)
+                .getReport(UserHelper.getUserToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Subscriber<ResearchBean>() {

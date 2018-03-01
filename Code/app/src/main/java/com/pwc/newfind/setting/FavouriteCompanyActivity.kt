@@ -19,6 +19,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.pwc.newfind.base.Application
 import com.pwc.newfind.R
+import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.bean.ActionStartCompanyBean
 import com.pwc.newfind.bean.FavouriteCompanyBean
 import com.pwc.newfind.bean.PostResult
@@ -54,7 +55,7 @@ class FavouriteCompanyActivity : AppCompatActivity() {
     private fun loadDate() {
         RetrofitHelper.getInstance(this)
                 .server
-                .getStarCompany(Application.getInstances().userToken)
+                .getStarCompany(UserHelper.getUserToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Subscriber<FavouriteCompanyBean>() {
@@ -148,7 +149,7 @@ class FavouriteCompanyActivity : AppCompatActivity() {
         action.fullName = arrayListOf<String>(item.name!!)
         RetrofitHelper.getInstance(this)
                 .server
-                .actionStarCompany(Application.getInstances().userToken, action)
+                .actionStarCompany(UserHelper.getUserToken(), action)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Subscriber<PostResult>() {

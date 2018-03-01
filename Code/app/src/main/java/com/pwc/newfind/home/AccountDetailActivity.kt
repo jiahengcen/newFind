@@ -3,6 +3,7 @@ package com.pwc.newfind.home
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import com.pwc.newfind.R
@@ -24,6 +25,7 @@ class AccountDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
+        Log.e("HLA","Account Detail resume")
         account_email.text = UserHelper.getUserEmail()
         account_phone.text = UserHelper.getUserPhone()
         logout.setOnClickListener(this)

@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.pwc.newfind.base.Application
 import com.pwc.newfind.R
+import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.net.RetrofitHelper
 import com.pwc.newfind.bean.CompanyDetailBean
 import com.pwc.newfind.entity.CompanyDetailEntity
@@ -90,7 +91,7 @@ class CompanyDetailActivity : AppCompatActivity() {
     private fun load() {
         RetrofitHelper.getInstance(this)
                 .server
-                .companyDetailInformation(Application.getInstances().userToken, companyCode)
+                .companyDetailInformation(UserHelper.getUserToken(), companyCode)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<CompanyDetailBean> {

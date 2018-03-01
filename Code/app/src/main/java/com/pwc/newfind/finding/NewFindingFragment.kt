@@ -16,6 +16,7 @@ import android.support.v7.widget.CardView
 import android.util.Log
 import android.widget.SimpleAdapter
 import com.pwc.newfind.base.Application
+import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.bean.FindingCompanyBean
 import com.pwc.newfind.bean.FindingTitleBean
 import com.pwc.newfind.net.RetrofitHelper
@@ -97,7 +98,7 @@ class NewFindingFragment : Fragment() {
         titleView.text = title
         RetrofitHelper.getInstance(activity)
                 .server
-                .getFindingTitles(Application.getInstances().userToken, filter)
+                .getFindingTitles(UserHelper.getUserToken(), filter)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<FindingCompanyBean> {
@@ -138,7 +139,7 @@ class NewFindingFragment : Fragment() {
         //listTitleLayout.visibility = View.GONE
         RetrofitHelper.getInstance(activity)
                 .server
-                .getFindingTitlesDefault(Application.getInstances().userToken)
+                .getFindingTitlesDefault(UserHelper.getUserToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<FindingCompanyBean> {
@@ -188,7 +189,7 @@ class NewFindingFragment : Fragment() {
     private fun loadTitleList() {
         RetrofitHelper.getInstance(activity)
                 .server
-                .getFindingTitleList(Application.getInstances().userToken)
+                .getFindingTitleList(UserHelper.getUserToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<FindingTitleBean> {

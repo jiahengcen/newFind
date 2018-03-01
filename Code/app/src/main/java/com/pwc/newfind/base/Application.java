@@ -2,22 +2,9 @@ package com.pwc.newfind.base;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.pwc.newfind.net.StringConverterFactory;
 import com.pwc.newfind.db.DaoMaster;
 import com.pwc.newfind.db.DaoSession;
-import com.pwc.newfind.db.UserDao;
-import com.pwc.newfind.db.entity.User;
-import com.pwc.newfind.net.Constant;
-import com.pwc.newfind.net.RetrofitService;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * Created by lhuang126 on 1/13/2018.
@@ -30,7 +17,6 @@ public class Application extends android.app.Application {
     private SQLiteDatabase db;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
-    private String mUserToken;
 
     @Override
     public void onCreate() {
@@ -38,45 +24,7 @@ public class Application extends android.app.Application {
         appContext = this;
         instances = this;
         setDatabase();
-        getUserTokenNet();
-    }
-
-    public void getTempUserToken() {
-        getUserTokenNet();
-    }
-
-    private void getUserTokenNet() {
-        if (mUserToken == null) {
-            List<User> user = getDaoSession().getUserDao().queryBuilder().where(UserDao.Properties.Id.eq(1)).list();
-            if (!user.isEmpty()) {
-                mUserToken = user.get(0).getToken();
-                Log.e("HLA", "get token from db:" + mUserToken);
-            }
-        }
-        if (mUserToken == null) {
-            new Retrofit.Builder()
-                    .addConverterFactory(new StringConverterFactory())
-                    .baseUrl(Constant.host)
-                    .build().create(RetrofitService.class)
-                    .getUserToken()
-                    .enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            mUserToken = response.body();
-                            User user = new User();
-                            user.setId(1L);
-                            user.setAge(0);
-                            user.setToken(mUserToken);
-                            getDaoSession().getUserDao().insertOrReplace(user);
-                            Log.e("HLA", "get token from net:" + mUserToken);
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-                            Log.e("HLA", "onFailure" + call);
-                        }
-                    });
-        }
+        UserHelper.getUserTokenNetOrLocal(null);
     }
 
     public static Application getInstances() {
@@ -105,18 +53,4 @@ public class Application extends android.app.Application {
     public SQLiteDatabase getDb() {
         return db;
     }
-
-    public void setUserToken(String mUserToken) {
-        this.mUserToken = mUserToken;
-        User user = new User();
-        user.setId(1L);
-        user.setAge(0);
-        user.setToken(mUserToken);
-        getDaoSession().getUserDao().insertOrReplace(user);
-    }
-
-    public String getUserToken() {
-        return mUserToken;
-    }
-
 }

@@ -12,6 +12,7 @@ import android.widget.*
 import com.pwc.newfind.base.Application
 import com.pwc.newfind.home.IndustryAdapter
 import com.pwc.newfind.R
+import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.bean.FavouriteIndustryBean
 import com.pwc.newfind.bean.IndustryListBean
 import com.pwc.newfind.net.Helper
@@ -73,7 +74,7 @@ class FavouriteIndustryActivity : AppCompatActivity(), View.OnClickListener, Ind
                     }
 
                 })
-        service.getStarIndustry(Application.getInstances().userToken)
+        service.getStarIndustry(UserHelper.getUserToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<FavouriteIndustryBean> {

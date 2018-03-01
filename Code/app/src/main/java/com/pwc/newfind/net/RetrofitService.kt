@@ -90,6 +90,7 @@ interface RetrofitService {
      */
     @POST(Constant.login)
     fun login(
+            @Header("Authorization") authorization: String,
             @Body action: ActionLoginBodyBean
     ): Observable<LoginPostResult>
 
@@ -99,6 +100,7 @@ interface RetrofitService {
      */
     @POST(Constant.register)
     fun register(
+            @Header("Authorization") authorization: String,
             @Body action: ActionRegisterBodyBean
     ): Observable<RegisterPostResult>
 }

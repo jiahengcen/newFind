@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.pwc.newfind.R
 import com.pwc.newfind.base.Application
+import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.bean.NewsBean
 import com.pwc.newfind.bean.SubscriptionBean
 import com.pwc.newfind.net.RetrofitHelper
@@ -65,7 +66,7 @@ class SubscriptionFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun load() {
         RetrofitHelper.getInstance(activity)
                 .server
-                .getNews(Application.getInstances().userToken)
+                .getNews(UserHelper.getUserToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Subscriber<NewsBean>() {

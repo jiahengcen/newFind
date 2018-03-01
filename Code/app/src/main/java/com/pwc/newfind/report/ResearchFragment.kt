@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.pwc.newfind.base.Application
 import com.pwc.newfind.R
+import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.bean.ResearchBean
 import com.pwc.newfind.entity.ResearchEntity
 import com.pwc.newfind.net.RetrofitHelper
@@ -60,7 +61,7 @@ class ResearchFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun load() {
         RetrofitHelper.getInstance(activity)
                 .server
-                .getReport(Application.getInstances().userToken)
+                .getReport(UserHelper.getUserToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Subscriber<ResearchBean>() {

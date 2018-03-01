@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.pwc.newfind.base.Application;
+import com.pwc.newfind.base.UserHelper;
 import com.pwc.newfind.bean.ActionStartCompanyBean;
 import com.pwc.newfind.bean.ActionStartIndustryBean;
 import com.pwc.newfind.bean.ActionStartReportBean;
@@ -34,7 +35,7 @@ public class Helper {
         actionStartReportBean.setActionType(actionType);
         actionStartReportBean.setId(fullNames);
         try {
-            RetrofitHelper.Companion.getInstance(context).getServer().actionStarResearch(Application.getInstances().getUserToken(), actionStartReportBean)
+            RetrofitHelper.Companion.getInstance(context).getServer().actionStarResearch(UserHelper.getUserToken(), actionStartReportBean)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Action1<PostResult>() {
@@ -58,7 +59,7 @@ public class Helper {
         actionStartCompanyBean.setActionType(actionType);
         actionStartCompanyBean.setFullName(fullNames);
         try {
-            RetrofitHelper.Companion.getInstance(context).getServer().actionStarCompany(Application.getInstances().getUserToken(), actionStartCompanyBean)
+            RetrofitHelper.Companion.getInstance(context).getServer().actionStarCompany(UserHelper.getUserToken(), actionStartCompanyBean)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Action1<PostResult>() {
@@ -85,7 +86,7 @@ public class Helper {
         actionStartIndustryBean.setIndustry(industries);
         try {
             RetrofitHelper.Companion.getInstance(context).getServer()
-                    .actionStarIndustry(Application.getInstances().getUserToken(), actionStartIndustryBean)
+                    .actionStarIndustry(UserHelper.getUserToken(), actionStartIndustryBean)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Subscriber<PostResult>() {

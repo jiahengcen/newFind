@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -36,6 +37,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         register.setOnClickListener(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.e("HLA", "Login resume")
+        if (UserHelper.getUserEmail().length > 2) {
+            finish()
+        }
+    }
+
     override fun onClick(v: View) {
         when (v.id) {
             R.id.login ->
@@ -59,15 +68,16 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             Toast.makeText(this@LoginActivity, "密码不能为空", Toast.LENGTH_SHORT).show()
             return
         }
+
         RetrofitHelper.getInstance(this)
                 .server
-                .login(loginBan)
+                .login(UserHelper.getUserToken(), loginBan)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<LoginPostResult> {
                     override fun onNext(t: LoginPostResult) {
                         if (t.msgId != null && t.msgId == 0) {
-                            Application.getInstances().userToken = t.authorization
+                            UserHelper.setUserToken(t.authorization)
                             UserHelper.setUserPhone(t.phone)
                         } else {
                             Toast.makeText(this@LoginActivity, "登录失败，用户名或密码错误", Toast.LENGTH_SHORT).show()
