@@ -6,6 +6,7 @@ package com.pwc.newfind.bean
 class LoginPostResult {
     val msg: String? = null
     val msgId: Int? = null
-    val authorization: String? = null
+    val token: String? = null
+    val email: String? = null
     val phone: String? = null
 }

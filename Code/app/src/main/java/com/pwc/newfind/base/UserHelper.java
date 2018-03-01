@@ -59,6 +59,9 @@ public class UserHelper {
     }
 
     public static void setUserToken(String userToken) {
+        if (userToken == null) {
+            userToken = DEFAULT_USER_TOKEN;
+        }
         mUserToken = userToken;
         User user = new User();
         user.setId(1L);
@@ -71,6 +74,10 @@ public class UserHelper {
     }
 
     public static String getUserToken() {
+        if (mUserToken.length() == 0) {
+            mUserToken = DEFAULT_USER_TOKEN;
+            Log.e("HLA", "getUserToken null");
+        }
         return mUserToken;
     }
 
@@ -80,14 +87,14 @@ public class UserHelper {
 
 
     public static void getUserTokenNetOrLocal(final OnTempTokenGetFinish onTempTokenGetFinish) {
-        if (mUserToken == DEFAULT_USER_TOKEN) {
+        if (mUserToken.equals(DEFAULT_USER_TOKEN)) {
             List<User> user = Application.getInstances().getDaoSession().getUserDao().queryBuilder().where(UserDao.Properties.Id.eq(1)).list();
             if (!user.isEmpty()) {
                 mUserToken = user.get(0).getToken();
                 Log.e("HLA", "get token from db:" + mUserToken);
             }
         }
-        if (mUserToken == mUserToken) {
+        if (mUserToken == null || mUserToken.equals(DEFAULT_USER_TOKEN)) {
             new Retrofit.Builder()
                     .addConverterFactory(new StringConverterFactory())
                     .baseUrl(Constant.host)
