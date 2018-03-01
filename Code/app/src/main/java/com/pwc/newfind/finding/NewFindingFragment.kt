@@ -76,7 +76,7 @@ class NewFindingFragment : Fragment() {
             }
             loadTitleList()
             listTitle.adapter = sampleAdapter
-            listContent.visibility = View.INVISIBLE
+           // listContent.visibility = View.INVISIBLE
             listTitleLayout.visibility = View.VISIBLE
         })
         Handler().postDelayed({ progressBar.visibility = View.GONE }, 5000)
@@ -130,11 +130,12 @@ class NewFindingFragment : Fragment() {
     }
 
     private fun loadCompanyListDefault() {
-        val animator = ObjectAnimator.ofFloat(listTitleLayout, "translationY", 0F, (listTitleLayout.measuredHeight).toFloat())
-        animator.duration = 1000
-        animator.start()
+         val animator = ObjectAnimator.ofFloat(listTitleLayout, "translationY", 0F, (listTitleLayout.measuredHeight).toFloat())
+         animator.duration = 1000
+         animator.start()
         listContent.adapter = companyAdapter
         //listTitle.visibility = View.GONE
+        listTitleLayout.visibility = View.INVISIBLE
         listContent.visibility = View.VISIBLE
         //listTitleLayout.visibility = View.GONE
         RetrofitHelper.getInstance(activity)
@@ -163,6 +164,7 @@ class NewFindingFragment : Fragment() {
                             companyTitleSubBean.starred = item.starred
                             data.add(companyTitleSubBean)
                         }
+                        titleView.text = t.title
                         companyAdapter.setData(data as ArrayList<CompanyTitleListBean.CompanyTitleSubBean>)
                         companyAdapter.notifyDataSetChanged()
                     }

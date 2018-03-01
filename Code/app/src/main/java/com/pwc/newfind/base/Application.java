@@ -2,6 +2,7 @@ package com.pwc.newfind.base;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import com.pwc.newfind.db.DaoMaster;
 import com.pwc.newfind.db.DaoSession;
@@ -17,6 +18,7 @@ public class Application extends android.app.Application {
     private SQLiteDatabase db;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
+
 
     @Override
     public void onCreate() {
@@ -53,4 +55,6 @@ public class Application extends android.app.Application {
     public SQLiteDatabase getDb() {
         return db;
     }
+
+
 }

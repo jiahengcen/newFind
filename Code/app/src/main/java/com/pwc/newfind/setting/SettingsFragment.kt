@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.pwc.newfind.R
+import com.pwc.newfind.base.Application
 import com.pwc.newfind.base.UserHelper
 import com.pwc.newfind.home.AccountDetailActivity
 import com.pwc.newfind.home.LoginActivity
@@ -27,6 +29,8 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         company.setOnClickListener(this)
         industry.setOnClickListener(this)
         user.setOnClickListener(this)
+        key_word.setOnClickListener(this)
+        my_favourite.setOnClickListener(this)
     }
 
     override fun onResume() {
@@ -51,6 +55,12 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                 startActivity(Intent(activity, FavouriteCompanyActivity::class.java))
             R.id.industry ->
                 startActivity(Intent(activity, FavouriteIndustryActivity::class.java))
+            R.id.key_word -> {
+                Toast.makeText(activity, "功能尚在开发", Toast.LENGTH_SHORT).show()
+            }
+            R.id.my_favourite -> {
+                Toast.makeText(activity, "功能尚在开发", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
