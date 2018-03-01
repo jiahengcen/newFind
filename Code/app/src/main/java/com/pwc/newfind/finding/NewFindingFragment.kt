@@ -212,7 +212,6 @@ class NewFindingFragment : Fragment() {
                             val hashMap = HashMap<String, Any>()
                             hashMap.put("title", item.title!!)
                             listMap.add(hashMap)
-
                         }
                         sampleAdapter.notifyDataSetChanged()
                     }
