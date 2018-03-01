@@ -28,13 +28,10 @@ class SearchActivity : AppCompatActivity() {
     override
     fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // 2. 绑定视图
         setContentView(R.layout.search_activity)
-
         // 3. 绑定组件
         searchView = findViewById<SearchView>(R.id.search_view)
-
         // 4. 设置点击搜索按键后的操作（通过回调接口）
         // 参数 = 搜索框输入的内容
         searchView!!.setOnClickSearch { string -> println("我收到了" + string) }
